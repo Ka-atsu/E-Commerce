@@ -1,0 +1,67 @@
+.dashboardLayout {
+    display: flex;
+    height: 100vh;
+}
+
+.dashboardContent {
+    flex: 1; 
+    padding: 30px;
+    background-color: whitesmoke; 
+    overflow-y: auto; 
+    margin-top: 7rem; 
+}
+
+.navTop{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 30px; 
+    background-color: rgb(255, 255, 255); 
+    width: 85%; 
+    height: 7rem;
+    position: fixed; 
+    top: 0; 
+    left: 15%; 
+    z-index: 100; 
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; 
+    padding: 30px;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    width: 15%; 
+    height: 100%; 
+}
+
+.sidebar a{
+    color: rgb(0, 0, 0); 
+    text-decoration: none;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.sidebar ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.addProductButton{
+    display: inline-block; 
+    padding: 10px 20px; 
+    background-color: #007BFF; 
+    color: white; 
+    text-align: center; 
+    text-decoration: none; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s; 
+    font-size: 16px; 
+}

@@ -1,19 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
-body {
-    position: relative;  
-    height: 100vh;       
-    background: #f8f9fa; 
-}
-
-.container {
+.loginContainer {
     position: absolute;              
     top: 50%;                       
     left: 50%;                      
@@ -30,16 +21,16 @@ body {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.header {
+.loginContainer .header {
     margin: 30px;
 }
 
-.header label {
+.loginContainer .header label {
     font-size: 48px;
     font-weight: 450;
 }
 
-.inputs {
+.loginContainer .inputs {
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -47,7 +38,7 @@ body {
     max-width: 350px;
 }
 
-.inputs input {
+.loginContainer .inputs input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -56,25 +47,21 @@ body {
     max-width: 500px; 
 }
 
-.submit-container {
+.loginContainer .submitContainer {
     display: flex;
     gap: 30px;
     margin: 40px auto;
 }
 
-.submit {
+button {
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    max-width: 200px; /* Slightly increased button width */
+    max-width: 200px;
     background-color: #007BFF;
     color: #fff;
     transition: background-color 0.3s ease;
-}
-.gray {
-    background: #EAEAEA;
-    color: #676767;
 }
