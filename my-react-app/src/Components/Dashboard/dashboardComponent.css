@@ -5,15 +5,13 @@
 
 .dashboardContent {
     flex: 1; 
-    padding: 30px;
-    background-color: whitesmoke; 
     overflow-y: auto; 
     margin-top: 7rem; 
 }
 
 .navTop{
     display: flex;
-    justify-content: space-between; 
+    justify-content: flex-end; 
     align-items: center; 
     padding: 30px; 
     background-color: rgb(255, 255, 255); 
@@ -64,4 +62,44 @@
     cursor: pointer; 
     transition: background-color 0.3s, transform 0.3s; 
     font-size: 16px; 
+}
+
+.productGrid{     
+    display: flex;
+    flex-wrap: wrap; 
+    padding: 3rem;
+}
+
+.productCard{
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 170px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.productCard input[type="button"] {
+    color: inherit; 
+    border: none; 
+    cursor: pointer; 
+    background-color: inherit;
+}
+
+.productView img {
+    width: 300px; 
+    height: auto; 
+    object-fit: cover;
+    margin-bottom: 5rem;
+}
+
+.productView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1; 
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.4s ease;
 }

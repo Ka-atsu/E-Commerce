@@ -8,9 +8,9 @@ const AddProductFrame = () => {
     return (
         <div className="dashboardLayout">
             <SidebarComponent />
+            <TopbarComponent />
             <div className="dashboardContent">
-                <TopbarComponent />
-                {<AddProductComponent />}
+                <AddProductComponent/>
             </div>
         </div>
     );

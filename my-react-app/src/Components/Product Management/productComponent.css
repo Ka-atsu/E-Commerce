@@ -1,0 +1,32 @@
+.fieldsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 30px;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.fieldsContainer .submitContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.fieldsContainer label {
+    font-size: 1.25rem; 
+    font-weight: 400;
+}
+
+.fieldsContainer input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+}
+
+h1 {
+    text-align: center; 
+    font-size: 2rem; 
+    font-weight: bold;
+    margin-bottom: 1rem; 
+}
