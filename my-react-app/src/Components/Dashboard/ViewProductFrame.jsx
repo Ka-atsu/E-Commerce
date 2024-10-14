@@ -20,7 +20,7 @@ const ViewProductFrame = () => {
             <Container>
                 <Row className="align-items-center">
                     <Col className='text-left'>
-                        <h1>Product View</h1>
+                        <h1>{product.name}</h1>
                     </Col>
                     <Col>
                         
@@ -36,7 +36,6 @@ const ViewProductFrame = () => {
                 <div className="productGrid">
                     <div className="productView">
                         <img src={product.imageUrl} alt={product.name} />
-                        <label>{product.name}</label><br />
                         <p>{product.description}</p>
                         <label>Barcode: {product.barcode}</label><br />
                         <label>Quantity: {product.quantity}</label><br />

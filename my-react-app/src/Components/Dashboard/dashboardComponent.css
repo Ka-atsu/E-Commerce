@@ -78,6 +78,11 @@
     transition: all 0.4s ease;
 }
 
+.productActions {
+    display: flex;
+    justify-content: space-around;
+}
+
 .productCard input[type="button"] {
     color: inherit; 
     border: none; 
@@ -103,3 +108,13 @@
     position: relative;
     transition: all 0.4s ease;
 }
+
+.productName {
+    display: block; /* Ensures the label takes up space */
+    width: 100%; /* Full width of the parent */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for overflow */
+    max-width: 160px; /* Set the maximum width to limit length */
+}
+

@@ -82,7 +82,7 @@ export const products = [
     },
     {
         id: 9,
-        name: "Apple MacBook Pro 16\"",
+        name: "Apple MacBook Pro 16",
         imageUrl: "https://via.placeholder.com/150",
         barcode: "556677889",
         description: "Powerful laptop with M1 chip, Retina display, and up to 20 hours of battery life.",
