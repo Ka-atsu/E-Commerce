@@ -69,6 +69,10 @@
     justify-content: space-around;
 }
 
+.productInfo img {
+    width: 150px; 
+}
+
 .productCard input[type="button"] {
     color: inherit; 
     border: none; 
@@ -95,11 +99,11 @@
 }
 
 .productName {
-    display: block; /* Ensures the label takes up space */
-    width: 100%; /* Full width of the parent */
-    white-space: nowrap; /* Prevent wrapping */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
-    max-width: 160px; /* Set the maximum width to limit length */
+    display: block; 
+    width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 160px; 
 }
 

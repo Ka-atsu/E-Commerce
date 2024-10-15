@@ -32,7 +32,11 @@ const AddProductComponent = () => {
                         <Form.Label>Category</Form.Label>
                         <Form.Control type='text'/>
                     </Form.Group>
-                    <div className="submitContainer">
+                    <Form.Group>
+                        <Form.Label>Image</Form.Label>
+                        <Form.Control type='file'/>
+                    </Form.Group>
+                    <div className="submitContainer mt-4">
                     <Link to="/dashboard" className="btn btn-primary" role="button" type='submit'>Submit</Link>
                     <Link to="/" className="btn btn-secondary" role="button">Cancel</Link>
                     </div>
