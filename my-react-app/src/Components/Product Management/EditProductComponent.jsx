@@ -32,8 +32,8 @@ const EditProductComponent = ({ productId }) => {
                         <Form.Control type='number'placeholder={product.quantity}/>
                     </Form.Group>
                     <div className="submitContainer">
-                    <button type="submit">Submit</button>
-                    <button type="button">Cancel</button>
+                    <Link to="/dashboard" className="btn btn-primary" role="button" type='submit'>Submit</Link>
+                    <Link to="/" className="btn btn-secondary" role="button">Cancel</Link>
                     </div>
                 </Form>
             </div>

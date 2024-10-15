@@ -11,10 +11,9 @@
 
 .navTop{
     display: flex;
-    justify-content: flex-end; 
+    justify-content: space-between;
     align-items: center; 
-    padding: 30px; 
-    background-color: rgb(255, 255, 255); 
+    padding: 3rem;  
     width: 85%; 
     height: 7rem;
     position: fixed; 
@@ -26,16 +25,17 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    gap: 4rem; 
-    padding: 30px;
+    align-items: center;
+    padding: 2rem;
+    gap: 5rem; 
     box-sizing: border-box;
-    background: rgb(255, 255, 255);
     width: 15%; 
     height: 100%; 
+    z-index: 100; 
 }
 
 .sidebar a{
-    color: rgb(0, 0, 0); 
+    color: inherit; 
     text-decoration: none;
     font-size: x-large;
     font-weight: 600;
@@ -48,20 +48,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-.addProductButton{
-    display: inline-block; 
-    padding: 10px 20px; 
-    background-color: #007BFF; 
-    color: white; 
-    text-align: center; 
-    text-decoration: none; 
-    border: none; 
-    border-radius: 5px;
-    cursor: pointer; 
-    transition: background-color 0.3s, transform 0.3s; 
-    font-size: 16px; 
 }
 
 .productGrid{     
@@ -104,7 +90,6 @@
     text-align: center;
     flex: 1; 
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: all 0.4s ease;
 }

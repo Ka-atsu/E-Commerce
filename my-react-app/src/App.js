@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
     return (
         <Routes>
+            <Route path="/login" exact element={<LoginComponent />} />
             <Route path="/" exact element={<DashboardFrame />} />
             <Route path="/addproduct" element={<AddProductFrame />} />
             <Route path="/editproduct/:id" element={<EditProductFrame />} />
