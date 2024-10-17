@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
             $table->integer('item_available_quantity'); // Quantity available
             $table->decimal('item_amount', 8, 2); // Amount (with 2 decimal places)
             $table->string('item_barcode'); // Barcode
+            $table->string('item_image'); // Barcode
             $table->timestamps(); // Created at and updated at
         });
     }

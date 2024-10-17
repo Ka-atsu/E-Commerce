@@ -16,5 +16,6 @@ class Product extends Model
         'item_available_quantity',
         'item_amount',
         'item_barcode',
+        'item_image',
     ];
 }
