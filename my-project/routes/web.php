@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/setupDb/{name}', function ($name) {
+    try {
+        // Create the database
+        DB::statement("CREATE DATABASE `$name`");
+
+        // Configure the new database connection
+        config(['database.connections.mysql.database' => $name]);
+
+        // Purge the existing connection to use the new one
+        DB::purge('mysql');
+        
+        // Run migrations on the new database
+        Artisan::call('migrate', ['--database' => 'mysql']);
+
+        Artisan::call('db:seed');
+
+        return "Database '{$name}' created and migrations ran successfully.";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
 });
