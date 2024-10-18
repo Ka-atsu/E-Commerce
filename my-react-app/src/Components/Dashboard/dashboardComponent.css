@@ -107,3 +107,11 @@
     max-width: 160px; 
 }
 
+.customButton{
+    background: transparent; 
+    border: none;
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: x-large;
+    font-weight: 600;
+}
+

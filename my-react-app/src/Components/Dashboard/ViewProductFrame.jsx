@@ -26,7 +26,7 @@ const ViewProductFrame = () => {
                         
                     </Col>
                     <Col className="text-right">
-                        <Link to="/" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/dashboard" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
                             Back to Dashboard
                         </Link>
                     </Col>

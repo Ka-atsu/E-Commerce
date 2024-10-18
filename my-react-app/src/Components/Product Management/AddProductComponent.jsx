@@ -78,7 +78,7 @@ const AddProductComponent = () => {
                     </Form.Group>
                     <div className="submitContainer mt-4">
                         <button className="btn btn-primary" type='submit'>Submit</button>
-                        <Link to="/" className="btn btn-secondary" role="button">Cancel</Link>
+                        <Link to="/dashboard" className="btn btn-secondary" role="button">Cancel</Link>
                     </div>
                 </Form>
             </div>

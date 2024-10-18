@@ -33,7 +33,7 @@ const EditProductComponent = ({ productId }) => {
                     </Form.Group>
                     <div className="submitContainer">
                     <Link to="/dashboard" className="btn btn-primary" role="button" type='submit'>Submit</Link>
-                    <Link to="/" className="btn btn-secondary" role="button">Cancel</Link>
+                    <Link to="/dashboard" className="btn btn-secondary" role="button">Cancel</Link>
                     </div>
                 </Form>
             </div>

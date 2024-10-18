@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link , useNavigate  } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import './dashboardComponent.css';
 
 const SidebarComponent = () => {
     const navigate = useNavigate();
 
     const handleDashboardClick = () => {
-        navigate('/'); // Navigate to the dashboard
-        window.location.reload(); // Refresh the page
+        navigate('/dashboard'); 
+        window.location.reload(); 
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('isAuthenticated'); 
+        navigate("/"); 
     };
 
     return (
@@ -15,10 +21,10 @@ const SidebarComponent = () => {
             <h1>Site Name</h1>
             <ul>
                 <li>
-                    <Link to="/" onClick={handleDashboardClick}>Dashboard</Link>
+                    <Link onClick={handleDashboardClick}>Dashboard</Link>
                 </li>
                 <li>
-                    <Link to="/signout">Sign Out</Link>
+                    <button class="customButton" onClick={handleLogout}>Sign Out</button>
                 </li>
             </ul>
         </div>
