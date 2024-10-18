@@ -6,10 +6,10 @@ import axios from 'axios';
 
 const EditProductComponent = ({ productId }) => {
     const [viewProduct, setViewProduct] = useState([]);
-    const [itemName, setItemName] = useState('');
-    const [itemDescription, setItemDescription] = useState('');
-    const [itemPrice, setItemPrice] = useState('');
-    const [itemAvailableQuantity, setItemAvailableQuantity] = useState('');
+    const [itemName, setItemName] = useState(viewProduct.item_name);
+    const [itemDescription, setItemDescription] = useState(viewProduct.item_description);
+    const [itemPrice, setItemPrice] = useState(viewProduct.item_amount);
+    const [itemAvailableQuantity, setItemAvailableQuantity] = useState(viewProduct.item_available_quantity);
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -44,19 +44,19 @@ const EditProductComponent = ({ productId }) => {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type='text' placeholder={viewProduct.item_name} onChange={(e) => setItemName(e.target.value)}/>
+                        <Form.Control type='text' placeholder={viewProduct.item_name} value={itemName} onChange={(e) => setItemName(e.target.value)}/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as='textarea' placeholder={viewProduct.item_description} onChange={(e) => setItemDescription(e.target.value)} />
+                        <Form.Control as='textarea' placeholder={viewProduct.item_description} value={itemDescription} onChange={(e) => setItemDescription(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Price</Form.Label>
-                        <Form.Control type='number' step='any' placeholder={viewProduct.item_amount} onChange={(e) => setItemPrice(e.target.value)} />
+                        <Form.Control type='number' step='any' placeholder={viewProduct.item_amount} value={itemPrice} onChange={(e) => setItemPrice(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Quantity</Form.Label>
-                        <Form.Control type='number' placeholder={viewProduct.item_available_quantity} onChange={(e) => setItemAvailableQuantity(e.target.value)} />
+                        <Form.Control type='number' placeholder={viewProduct.item_available_quantity} value={itemAvailableQuantity} onChange={(e) => setItemAvailableQuantity(e.target.value)} />
                     </Form.Group>
                     <div className="submitContainer">
                         <button className="btn btn-primary" type='submit'>Submit</button>
