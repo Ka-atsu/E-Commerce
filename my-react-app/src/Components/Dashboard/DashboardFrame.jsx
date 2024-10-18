@@ -1,7 +1,6 @@
-import React, { useState  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import SidebarComponent from './SidebarComponent';
 import TopbarComponent from './TopbarComponent';
-import { products } from './Mock';
 import './dashboardComponent.css';
 import { Link  } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -10,7 +9,15 @@ import DeleteProductFrame from './DeleteProductFrame';
 const DashboardFrame = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
-    const [filteredProducts, setFilteredProducts] = useState(products);
+    const [viewProducts, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState(null);
+    
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/display_products')
+            .then(response => response.json())
+            .then(data => setProducts(data.products))
+            .catch(error => console.error('Error fetching tasks: ', error));
+    }, []);
 
     const handleDeleteClick = (product) => {
         setProductToDelete(product);
@@ -23,7 +30,7 @@ const DashboardFrame = () => {
     };
 
     const handleSearch = (input) => {
-        const results = products.filter(product => 
+        const results = viewProducts.filter(product => 
             product.category.toLowerCase().includes(input.toLowerCase())
         );
         setFilteredProducts(results);
@@ -35,14 +42,14 @@ const DashboardFrame = () => {
             <TopbarComponent onSearch={handleSearch} />
             <div className="dashboardContent">
                 <div className="productGrid">
-                    {filteredProducts.map(product => (
+                    {viewProducts.map(product => (
                         <div className="productCard" key={product.id}>
                             <div className="productInfo">
-                                <img src={product.imageUrl} alt={product.name} />
-                                <label className='productName'>{product.name}</label>
-                                <label>Barcode: {product.barcode}</label><br />
-                                <label>Quantity: {product.quantity}</label><br />
-                                <label>Price: ${product.price.toFixed(2)}</label>
+                                <img src={`http://127.0.0.1:8000/${product.item_image}`} alt={product.item_name} />
+                                <label className='productName'>{product.item_name}</label>
+                                <label>Barcode: {product.item_barcode}</label><br />
+                                <label>Quantity: {product.item_available_quantity}</label><br />
+                                <label>Price: ${parseFloat(product.item_amount).toFixed(2)}</label>
                             </div>
                             <div className="productActions">
                                 <ListGroup horizontal>
@@ -63,7 +70,7 @@ const DashboardFrame = () => {
 
                 {showDeleteModal && productToDelete && (
                     <DeleteProductFrame
-                        product={productToDelete}
+                        viewProducts={productToDelete}
                         handleClose={handleCloseModal}
                     />
                 )}

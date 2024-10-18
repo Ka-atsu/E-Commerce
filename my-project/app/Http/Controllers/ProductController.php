@@ -15,8 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        return Product::all(); // Retrieve all products
+        $products = Product::all();
+        return response()->json([
+            'status' => 200,
+            'products' => $products, 
+        ]);
     }
 
     /**
@@ -76,7 +79,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewProduct = Product::find($id);
+
+        return response()->json($viewProduct, 200);
     }
 
     /**
