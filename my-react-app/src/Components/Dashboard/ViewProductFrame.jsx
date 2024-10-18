@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const ViewProductFrame = () => {
-    onst [viewProduct, setViewProduct] = useState([]);
+    const [viewProduct, setViewProduct] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {    
@@ -32,7 +32,7 @@ const ViewProductFrame = () => {
                         
                     </Col>
                     <Col className="text-right">
-                        <Link to="/" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/dashboard" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
                             Back to Dashboard
                         </Link>
                     </Col>

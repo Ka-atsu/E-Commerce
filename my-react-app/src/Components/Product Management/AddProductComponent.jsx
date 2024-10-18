@@ -27,7 +27,7 @@ const AddProductComponent = () => {
         dataToBeAdded.append('image', image); 
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/products', {
+            const response = await fetch('http://127.0.0.1:8000/api/create_product', {
                 method: 'POST',
                 body: dataToBeAdded, 
             });
