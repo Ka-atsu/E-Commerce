@@ -70,7 +70,13 @@ const AddProductComponent = () => {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control type='text' value={category} onChange={(e) => setCategory(e.target.value)} />
+                        <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
+                            <option value="">Select Category</option>
+                            <option value="Sneakers">Sneakers</option>
+                            <option value="Loafers">Loafers</option>
+                            <option value="Cycling Shoes">Cycling Shoes</option>
+                            <option value="Sandals">Sandals</option>
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image</Form.Label>

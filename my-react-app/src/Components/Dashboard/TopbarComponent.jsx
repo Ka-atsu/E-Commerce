@@ -9,7 +9,7 @@ const TopbarComponent = ({ onSearch }) => {
     const handleSearch = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
-        onSearch(value); // Call the search function on input change
+        onSearch(value); 
     };
 
     return (
@@ -20,7 +20,7 @@ const TopbarComponent = ({ onSearch }) => {
                     placeholder="Search" 
                     className="me-1" 
                     value={searchTerm}
-                    onChange={handleSearch} // Update on change
+                    onChange={handleSearch} 
                 />
             </Form>
             <Link to="/addProduct" className="btn btn-primary">+ ADD PRODUCT</Link>
