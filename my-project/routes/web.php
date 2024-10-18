@@ -33,8 +33,6 @@ Route::get('/setupDb/{name}', function ($name) {
         // Run migrations on the new database
         Artisan::call('migrate', ['--database' => 'mysql']);
 
-        Artisan::call('db:seed');
-
         return "Database '{$name}' created and migrations ran successfully.";
     } catch (\Exception $e) {
         return "Error: " . $e->getMessage();
