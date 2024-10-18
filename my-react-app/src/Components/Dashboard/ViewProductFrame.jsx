@@ -16,7 +16,7 @@ const ViewProductFrame = () => {
           .then(response => response.json())
           .then(data => setViewProduct(data))
           .catch(error => console.error('Error fetching tasks:', error));
-    }, []);
+    }, [id]);
 
     return (
         <div className="dashboardLayout">

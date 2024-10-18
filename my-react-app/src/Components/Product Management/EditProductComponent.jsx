@@ -11,11 +11,17 @@ const EditProductComponent = ({ productId }) => {
     const [itemPrice, setItemPrice] = useState(viewProduct.item_amount);
     const [itemAvailableQuantity, setItemAvailableQuantity] = useState(viewProduct.item_available_quantity);
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/view_product/${productId}`)
           .then(response => response.json())
-          .then(data => setViewProduct(data))
+          .then(data => {
+                setViewProduct(data);
+                setItemName(data.item_name);
+                setItemDescription(data.item_description);
+                setItemPrice(data.item_amount);
+                setItemAvailableQuantity(data.item_available_quantity);
+            })
           .catch(error => console.error('Error fetching tasks:', error));
     }, []);
 
