@@ -60,6 +60,12 @@ const DashboardFrame = () => {
     const handleCloseModal = () => {
         setShowDeleteModal(false);
         setProductToDelete(null);
+    }
+
+    const handleProductDeleted = (deletedProductId) => {
+        const updatedProducts = allProducts.filter(product => product.id !== deletedProductId);
+        setAllProducts(updatedProducts);
+        setFilteredProducts(updatedProducts);
     };
 
     return (
@@ -94,12 +100,13 @@ const DashboardFrame = () => {
                     ))}
                 </div>
 
-                {showDeleteModal && productToDelete && (
+                 {showDeleteModal && productToDelete && (
                     <DeleteProductFrame
-                        viewProducts={productToDelete}
+                        product={productToDelete}
                         handleClose={handleCloseModal}
+                        onProductDeleted={handleProductDeleted}
                     />
-                )}
+                )} 
             </div>
         </div>
     );

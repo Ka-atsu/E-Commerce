@@ -25,3 +25,4 @@ Route::get('/view_product/{id}', [ProductController::class, 'show']);
 
 Route::put('/update_product/{id}', [ProductController::class, 'update']);
 
+Route::delete('/delete_product/{id}', [ProductController::class, 'destroy']);
