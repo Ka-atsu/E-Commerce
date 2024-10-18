@@ -6,7 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Barcode from 'react-barcode';
 const ViewProductFrame = () => {
     const [viewProduct, setViewProduct] = useState([]);
     const { id } = useParams();
@@ -15,7 +15,7 @@ const ViewProductFrame = () => {
         fetch(`http://127.0.0.1:8000/api/view_product/${id}`)
           .then(response => response.json())
           .then(data => setViewProduct(data))
-          .catch(error => console.error('Error fetching tasks:', error));
+          .catch(error => console.error('Error fetching product:', error));
     }, [id]);
 
     return (
@@ -28,9 +28,7 @@ const ViewProductFrame = () => {
                     <Col className='text-left'>
                         <h1>{viewProduct.name}</h1>
                     </Col>
-                    <Col>
-                        
-                    </Col>
+                    <Col></Col>
                     <Col className="text-right">
                         <Link to="/dashboard" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
                             Back to Dashboard
@@ -39,15 +37,23 @@ const ViewProductFrame = () => {
                 </Row>
             </Container>
 
-                <div className="productGrid">
-                    <div className="productView">
-                        <img src={`http://127.0.0.1:8000/${viewProduct.item_image}`} alt={viewProduct.item_name} />
-                        <p>{viewProduct.item_description}</p>
-                        <label>Barcode: {viewProduct.item_barcode}</label><br />
-                        <label>Quantity: {viewProduct.item_available_quantity}</label><br />
-                        <label>Price: ${parseFloat(viewProduct.item_amount).toFixed(2)}</label><br />
-                    </div>
+            <div className="productGrid">
+                <div className="productView">
+                    <img src={`http://127.0.0.1:8000/${viewProduct.item_image}`} alt={viewProduct.item_name} />
+                    <p>{viewProduct.item_description}</p>
+                    <label>Barcode: {viewProduct.item_barcode}</label><br />
+                    <label>Quantity: {viewProduct.item_available_quantity}</label><br />
+                    <label>Price: ${parseFloat(viewProduct.item_amount).toFixed(2)}</label><br />
+
+                    
+                    {viewProduct.item_barcode && (
+                        <div>
+                            <h5>Barcode:</h5>
+                            <Barcode value={viewProduct.item_barcode} />
+                        </div>
+                    )}
                 </div>
+            </div>
             </div>
         </div>
     );

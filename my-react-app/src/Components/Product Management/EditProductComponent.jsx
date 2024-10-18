@@ -3,6 +3,7 @@ import './productComponent.css';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Barcode from 'react-barcode';
 
 const EditProductComponent = ({ productId }) => {
     const [viewProduct, setViewProduct] = useState([]);
@@ -46,7 +47,8 @@ const EditProductComponent = ({ productId }) => {
             <div className='fieldsContainer'>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
-                        <Form.Label>ID {viewProduct.id}</Form.Label>
+                        <Form.Label>Barcode:
+                        <Barcode value={viewProduct.item_barcode} /></Form.Label>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Barcode from 'react-barcode'; 
 import Form from 'react-bootstrap/Form';
 import './productComponent.css';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddProductComponent = () => {
     const [barcode, setBarcode] = useState('');
@@ -14,17 +15,28 @@ const AddProductComponent = () => {
 
     const navigate = useNavigate();
 
+    
+    const generateProductCode = () => {
+        return 'P-' + Math.floor(100000 + Math.random() * 900000);
+    };
+
+    
+    useEffect(() => {
+        const generatedBarcode = generateProductCode();
+        setBarcode(generatedBarcode);
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const dataToBeAdded = new FormData();
-        dataToBeAdded.append('barcode', barcode);
+        dataToBeAdded.append('barcode', barcode); 
         dataToBeAdded.append('name', name);
         dataToBeAdded.append('description', description);
         dataToBeAdded.append('price', price);
         dataToBeAdded.append('quantity', quantity);
         dataToBeAdded.append('category', category);
-        dataToBeAdded.append('image', image); 
+        dataToBeAdded.append('image', image);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/create_product', {
@@ -49,9 +61,16 @@ const AddProductComponent = () => {
             <div className='fieldsContainer'>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
-                        <Form.Label>Barcode</Form.Label>
-                        <Form.Control type='text' value={barcode} onChange={(e) => setBarcode(e.target.value)} />
+                        <Form.Label>Product Code (Barcode)</Form.Label>
+                        <Form.Control type='text' value={barcode} readOnly />
                     </Form.Group>
+                    
+                    
+                    <Form.Group>
+                        <Form.Label>Barcode</Form.Label>
+                        <Barcode value={barcode} /> 
+                    </Form.Group>
+
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} />
