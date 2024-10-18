@@ -23,3 +23,5 @@ Route::get('/display_products', [ProductController::class, 'index']);
 
 Route::get('/view_product/{id}', [ProductController::class, 'show']);
 
+Route::put('/update_product/{id}', [ProductController::class, 'update']);
+
