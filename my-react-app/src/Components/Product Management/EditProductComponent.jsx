@@ -43,12 +43,12 @@ const EditProductComponent = ({ productId }) => {
 
     return (
         <div>
-            <h1>Edit Product</h1>
             <div className='fieldsContainer'>
+                <h1 className='text-center'>Edit Product</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Barcode:
-                        <Barcode value={viewProduct.item_barcode} /></Form.Label>
+                        <Barcode value={viewProduct.item_barcode}  width={2} height={50}/></Form.Label>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>

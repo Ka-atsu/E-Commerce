@@ -60,6 +60,7 @@ const DashboardFrame = () => {
     const handleCloseModal = () => {
         setShowDeleteModal(false);
         setProductToDelete(null);
+        setSearchTerm('');
     }
 
     const handleProductDeleted = (deletedProductId) => {
