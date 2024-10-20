@@ -57,18 +57,16 @@ const AddProductComponent = () => {
 
     return (
         <div>
-            <h1>Add Product</h1>
             <div className='fieldsContainer'>
+                <h1 className='text-center'>Add Product</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Product Code (Barcode)</Form.Label>
                         <Form.Control type='text' value={barcode} readOnly />
                     </Form.Group>
-                    
-                    
                     <Form.Group>
                         <Form.Label>Barcode</Form.Label>
-                        <Barcode value={barcode} /> 
+                        <Barcode value={barcode}  width={2} height={50}/> 
                     </Form.Group>
 
                     <Form.Group>

@@ -13,7 +13,7 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:8000/api/login', {
+        await axios.post('http://localhost:8000/api/login', {
             name, 
             password,
         });

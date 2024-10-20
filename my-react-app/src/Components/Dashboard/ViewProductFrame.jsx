@@ -10,7 +10,11 @@ import Barcode from 'react-barcode';
 const ViewProductFrame = () => {
     const [viewProduct, setViewProduct] = useState([]);
     const { id } = useParams();
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
+    const handleCategoryChange = (categories) => {
+        setSelectedCategories(categories);
+    };
     useEffect(() => {    
         fetch(`http://127.0.0.1:8000/api/view_product/${id}`)
           .then(response => response.json())
@@ -20,40 +24,37 @@ const ViewProductFrame = () => {
 
     return (
         <div className="dashboardLayout">
-            <SidebarComponent />
+            <SidebarComponent onCategoryChange={handleCategoryChange} />
             <TopbarComponent />
             <div className="dashboardContent">
-            <Container>
-                <Row className="align-items-center">
-                    <Col className='text-left'>
-                        <h1>{viewProduct.name}</h1>
-                    </Col>
-                    <Col></Col>
-                    <Col className="text-right">
+                <div className="productGrid">
+                    <div className="productView align-items-center">
+                        <Container>
                         <Link to="/dashboard" className='btn btn-outline-secondary' style={{ textDecoration: 'none', color: 'inherit' }}>
                             Back to Dashboard
                         </Link>
-                    </Col>
-                </Row>
-            </Container>
-
-            <div className="productGrid">
-                <div className="productView">
-                    <img src={`http://127.0.0.1:8000/${viewProduct.item_image}`} alt={viewProduct.item_name} />
-                    <p>{viewProduct.item_description}</p>
-                    <label>Barcode: {viewProduct.item_barcode}</label><br />
-                    <label>Quantity: {viewProduct.item_available_quantity}</label><br />
-                    <label>Price: ${parseFloat(viewProduct.item_amount).toFixed(2)}</label><br />
-
-                    
-                    {viewProduct.item_barcode && (
-                        <div>
-                            <h5>Barcode:</h5>
-                            <Barcode value={viewProduct.item_barcode} />
-                        </div>
-                    )}
+                        <Row className="mt-4">
+                            {viewProduct.item_barcode && (
+                                    <div>
+                                        <Barcode value={viewProduct.item_barcode}  width={3} height={50}/>
+                                    </div>
+                            )}
+                            <Col className='text-left'>
+                                <img src={`http://127.0.0.1:8000/${viewProduct.item_image}`} alt={viewProduct.item_name} />
+                            </Col>
+                            <Col className='text-right'>
+                                <h2>{viewProduct.item_name}</h2>
+                                <hr/>
+                                <label>Price: ${parseFloat(viewProduct.item_amount).toFixed(2)}</label><br />
+                                <label>Category: {viewProduct.item_category}</label><br />
+                                <label>Quantity: {viewProduct.item_available_quantity}</label><br />
+                                <hr/>
+                                <p>{viewProduct.item_description}</p>
+                            </Col>
+                        </Row>
+                        </Container>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import SidebarComponent from './SidebarComponent';
 import TopbarComponent from './TopbarComponent';
 import EditProductComponent from '../Product Management/EditProductComponent';
@@ -7,9 +7,14 @@ import './dashboardComponent.css';
 
 const EditProductFrame = () => {
     const { id } = useParams();
+    const [selectedCategories, setSelectedCategories] = useState([]);
+
+    const handleCategoryChange = (categories) => {
+        setSelectedCategories(categories);
+    };
     return (
         <div className="dashboardLayout">
-            <SidebarComponent />
+            <SidebarComponent onCategoryChange={handleCategoryChange} />
             <TopbarComponent />
             <div className="dashboardContent">
                 <EditProductComponent productId={id}/>
