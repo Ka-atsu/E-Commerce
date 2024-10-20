@@ -23,27 +23,43 @@ Ngayon na alam niyo na kung paano gamitin ang git, narito na ang mga steps kung 
 > [!TIP] 
 > Great practice na rin if gagamit kayo ng __GIT BASH__ gawa nang mas madali siyang gamitin pero kung trip niyo ang __Command Prompt__ pwede din naman yon.
 
-3. I-pull ang GitHub repository ng E-Commerce.
+3. I-pull ang GitHub repository ng E-Commerce.\
+
 4. Once na mapull niyo na ang GitHub repository, i-open ang ginawang folder sa Visual Studio Code.
+
 5. Buksan ang XAMPP Control Panel at iopen ang Apache pati ang MySQL.
+
 6. Bumalik sa Visual Studio Code at gumawa ng terminal.
 > [!TIP]
 > Ang hotkey para makagawa ng Terminal ay pindutin ang <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>`</kbd>
 7. Pumunta sa directory ng my-react-app at itype sa terminal ang `npm install`
+
 >[!IMPORTANT]
 > Make sure na nasa directory kayo ng my-react-app sa terminal niyo. Baka kasi maidownload niyo ang mga node_module folders sa labas ng my-react-app.
+
 8. Gumawa ulit ng terminal at papuntahin ang terminal sa my-project folder at itype sa terminal ang `composer install`.
 >[!IMPORTANT]
 > Make sure ulit na nasa directory kayo ng my-project sa terminal niyo. Baka maidownload niyo ang mga libraries ng laravel sa labas ng my-project.
+
 9. Pindutin niyo ang folder ng my-project at ipangalan ang file na `.env`, i-copy ang nasa laman ng `.env.example` at ipaste ito sa ginawang `.env` file.
 >[!IMPORTANT]
 >  Crucial ang step na ito gawa nang hindi gagana ang backend nang wala ito. Ang file na ginawa niyo ay nagsisilbing command para makagawa ng database at makaaccess sa API ng Laravel.
-10. Pumunta ulit sa ginawang terminal para sa my-project folder, itype doon ang command na `php artisan migrate` at pindutin ang <kbd>Enter</kbd>
-11. After gawin ito, itype sa terminal ang command na `php artisan db:seed` at pindutin ang <kbd>Enter</kbd>
-12. Pumunta sa ginawang terminal para sa my-react-app folder, itype sa terminal ang command na `npm start` para mapagana ang website.
-13. Malalaman niyo ang username at password ng website kapag pumunta kayo sa folder ng seeders na matatagpuan sa loob ng database folder na naroroon sa my-project folder.
-14. Kapag na-itype na ang username at password, makakapasok na kayo sa loob ng dashboard.
-15. Pwede na kayong magsimula mag-design ng program.
+
+10. I-type sa command ng ginawang terminal sa my-project folder ang `php artisan key:generate`
+>[!IMPORTANT]
+>  Crucial ang step na ito gawa nang hindi gagana ang backend nang wala ito.
+
+11. Pumunta ulit sa ginawang terminal para sa my-project folder, itype doon ang command na `php artisan migrate` at pindutin ang <kbd>Enter</kbd>
+
+12. After gawin ito, itype sa terminal ang command na `php artisan db:seed` at pindutin ang <kbd>Enter</kbd>
+
+13. Pumunta sa ginawang terminal para sa my-react-app folder, itype sa terminal ang command na `npm start` para mapagana ang website.
+
+14. Malalaman niyo ang username at password ng website kapag pumunta kayo sa folder ng seeders na matatagpuan sa loob ng database folder na naroroon sa my-project folder.
+
+15. Kapag na-itype na ang username at password, makakapasok na kayo sa loob ng dashboard.
+
+16. Pwede na kayong magsimula mag-design ng program.
 
 ## Tutorial Links for Learning
 * [Git Documentation](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
