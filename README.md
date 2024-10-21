@@ -9,6 +9,7 @@ if hindi niyo pa alam, ito muna ang basahin niyo para maset-up niyo ang Git.
 [Tutorial Video in Youtube](https://youtu.be/HkdAHXoRtos?si=IUjFZ3aJSUCudiy0)
 <br/>
 [Command Prompt Tutorials](https://youtube.com/playlist?list=PL6gx4Cwl9DGDV6SnbINlVUd0o2xT4JbMu&si=tWlbdzb4M92iknXw)
+
 >[!NOTE]
 > Paki-intindi muna ng mga binigay kong link para maunawaan niyo kung paano nagwowork ang Git at Github.
 
@@ -23,7 +24,7 @@ Ngayon na alam niyo na kung paano gamitin ang git, narito na ang mga steps kung 
 > [!TIP] 
 > Great practice na rin if gagamit kayo ng __GIT BASH__ gawa nang mas madali siyang gamitin pero kung trip niyo ang __Command Prompt__ pwede din naman yon.
 
-3. I-pull ang GitHub repository ng E-Commerce.\
+3. I-pull ang GitHub repository ng E-Commerce.
 
 4. Once na mapull niyo na ang GitHub repository, i-open ang ginawang folder sa Visual Studio Code.
 
@@ -32,6 +33,7 @@ Ngayon na alam niyo na kung paano gamitin ang git, narito na ang mga steps kung 
 6. Bumalik sa Visual Studio Code at gumawa ng terminal.
 > [!TIP]
 > Ang hotkey para makagawa ng Terminal ay pindutin ang <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>`</kbd>
+
 7. Pumunta sa directory ng my-react-app at itype sa terminal ang `npm install`
 
 >[!IMPORTANT]

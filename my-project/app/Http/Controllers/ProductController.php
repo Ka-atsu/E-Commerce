@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -41,34 +41,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
-        if($request-> has('image')){
-            $file = $request->file('image');
-
-            $originalFileName = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME);
-            $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            $sanitizedFileName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $originalFileName);
-            $uniqueId = uniqid('', false);
-            $filename = $sanitizedFileName . '(' . $uniqueId . ').' . $extension;
-
-            $path = 'storage/products/';
-            $file->move($path, $filename);
-            $filePath = $path . $filename; 
-        }
-    
-        // Create a new product in the database
-        $product = Product::create([
-            'item_name' => $request->input('name'),
-            'item_description' => $request->input('description'),
-            'item_category' => $request->input('category'),
-            'item_available_quantity' => $request->input('quantity'),
-            'item_amount' => $request->input('price'),
-            'item_barcode' => $request->input('barcode'),
-            'item_image' => $filePath, 
+        try{
+            /* Validating the data being sent to the Create Operation */
+            $validatedProduct = $request->validate([
+                'product_name' => ['required', 'max:255'],
+                'product_description' => ['required'],
+                'product_category' => ['required'],
+                'product_available_quantity' => ['required', 'numeric'],
+                'product_amount' => ['required', 'decimal:2'],
+                'product_barcode' => ['required'],
             ]);
-        
-        // Return a JSON response with the created product
-        return response()->json($product, 201);
+
+            /* After validating the data, it will now proceed to add a product to the database. */
+            Product::create($validatedProduct);
+            return response()->json($validatedProduct, 201);
+
+        } catch (ValidationException $e) { /* If the data that has been sent has not been validated, the catch block will proceed to send error to the frontend. */
+            return response()->json([
+                'errors' => $e->errors(),
+            ], 422);
+        }
     }
 
     /**
@@ -104,14 +96,34 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateItem = Product::find($id);
-        $updateItem->item_name = $request->input('item_name');
-        $updateItem->item_description = $request->input('item_description');
-        $updateItem->item_amount = $request->input('item_amount');
-        $updateItem->item_available_quantity = $request->input('item_available_quantity');
-        $updateItem->save();
-        
-        return response()->json($updateItem, 200);
+        try{
+                /* Validating Data being sent to the Backend */
+            $validatedData = $request->validate([
+                'product_name' => ['required', 'max:255'],
+                'product_description' => ['required'],
+                'product_amount' => ['required', 'decimal:2'],
+                'product_available_quantity' => ['required', 'numeric'],
+            ]);
+            
+            /* 
+                After validating the data, the code below will find the row with the same id and it will replace
+                the product's name, description, amount, and its quantity.
+            */
+            $updateItem = Product::find($id);
+            $updateItem->product_name = $validatedData['product_name'];
+            $updateItem->product_description = $validatedData['product_description'];
+            $updateItem->product_amount = $validatedData['product_amount'];
+            $updateItem->product_available_quantity = $validatedData['product_available_quantity'];
+            $updateItem->save();
+
+            return response()->json($updateItem, 200);
+
+        } catch(ValidationException $e){ /* If the data that has been sent is not accepted, the catch block would send errors to the front-end. */
+            return response()->json([
+                'errors' => $e->errors(),
+            ], 422);
+        }
+
     }
 
     /**
