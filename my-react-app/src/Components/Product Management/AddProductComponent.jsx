@@ -11,7 +11,6 @@ const AddProductComponent = () => {
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
     const [category, setCategory] = useState('');
-    const [image, setImage] = useState(null);
 
     const navigate = useNavigate();
 
@@ -30,13 +29,12 @@ const AddProductComponent = () => {
         e.preventDefault();
 
         const dataToBeAdded = new FormData();
-        dataToBeAdded.append('barcode', barcode); 
-        dataToBeAdded.append('name', name);
-        dataToBeAdded.append('description', description);
-        dataToBeAdded.append('price', price);
-        dataToBeAdded.append('quantity', quantity);
-        dataToBeAdded.append('category', category);
-        dataToBeAdded.append('image', image);
+        dataToBeAdded.append('product_barcode', barcode); 
+        dataToBeAdded.append('product_name', name);
+        dataToBeAdded.append('product_description', description);
+        dataToBeAdded.append('product_amount', price);
+        dataToBeAdded.append('product_available_quantity', quantity);
+        dataToBeAdded.append('product_category', category);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/create_product', {
@@ -94,10 +92,6 @@ const AddProductComponent = () => {
                             <option value="Cycling Shoes">Cycling Shoes</option>
                             <option value="Sandals">Sandals</option>
                         </Form.Select>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Image</Form.Label>
-                        <Form.Control type='file' onChange={(e) => setImage(e.target.files[0])} />
                     </Form.Group>
                     <div className="submitContainer mt-4">
                         <button className="btn btn-primary" type='submit'>Submit</button>

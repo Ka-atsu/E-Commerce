@@ -34,20 +34,18 @@ const ViewProductFrame = () => {
                             Back to Dashboard
                         </Link>
                         <Row className="mt-4">
-                            {viewProduct.item_barcode && (
+                            {viewProduct.product_barcode && (
                                     <div>
-                                        <Barcode value={viewProduct.item_barcode}  width={3} height={50}/>
+                                        <Barcode value={viewProduct.product_barcode}  width={3} height={50}/>
                                     </div>
                             )}
-                            <Col className='text-left'>
-                                <img src={`http://127.0.0.1:8000/${viewProduct.item_image}`} alt={viewProduct.item_name} />
-                            </Col>
-                            <Col className='text-right'>
-                                <h2>{viewProduct.item_name}</h2>
+                            <Col>
                                 <hr/>
-                                <label>Price: ${parseFloat(viewProduct.item_amount).toFixed(2)}</label><br />
-                                <label>Category: {viewProduct.item_category}</label><br />
-                                <label>Quantity: {viewProduct.item_available_quantity}</label><br />
+                                <label>Product Name: {viewProduct.product_name}</label><br />
+                                <label>Description: {viewProduct.product_description}</label><br />
+                                <label>Price: ${parseFloat(viewProduct.product_amount).toFixed(2)}</label><br />
+                                <label>Category: {viewProduct.product_category}</label><br />
+                                <label>Quantity: {viewProduct.product_available_quantity}</label><br />
                                 <hr/>
                                 <p>{viewProduct.item_description}</p>
                             </Col>

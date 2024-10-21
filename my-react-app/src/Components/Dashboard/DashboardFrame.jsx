@@ -32,13 +32,13 @@ const DashboardFrame = () => {
         let filtered = allProducts;
         if (searchTerm) {
             filtered = filtered.filter(product => 
-                product.item_name.toLowerCase().includes(searchTerm.toLowerCase())
+                product.product_name.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
         if (selectedCategories.length > 0) {
             filtered = filtered.filter(product => 
-                selectedCategories.includes(product.item_category)
+                selectedCategories.includes(product.product_category)
             );
         }
         setFilteredProducts(filtered); 
@@ -78,11 +78,10 @@ const DashboardFrame = () => {
                     {filteredProducts.map(product => (
                         <div className="productCard" key={product.id}>
                             <div className="productInfo">
-                                <img src={`http://127.0.0.1:8000/${product.item_image}`} alt={product.item_name} />
-                                <label className='productInfo'>{product.item_name}</label>
-                                <label className='productInfo'>Barcode: {product.item_barcode}</label>
-                                <label>Quantity: {product.item_available_quantity}</label><br />
-                                <label>₱{parseFloat(product.item_amount).toFixed(2)}</label>
+                                <label className='productInfo'>{product.product_name}</label>
+                                <label className='productInfo'>Barcode: {product.product_barcode}</label>
+                                <label>Quantity: {product.product_available_quantity}</label><br />
+                                <label>₱{parseFloat(product.product_amount).toFixed(2)}</label>
                             </div>
                             <div className="productActions">
                                 <ListGroup horizontal>
