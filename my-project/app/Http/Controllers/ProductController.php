@@ -138,7 +138,7 @@ class ProductController extends Controller
 
         } catch(ValidationException $e){ /* If the data that has been sent is not accepted, the catch block would send errors to the front-end. */
             return response()->json([
-                'errors' => $e->errors(),
+                'validationErrors' => $e->errors(),
             ], 422);
         }
 

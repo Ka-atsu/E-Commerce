@@ -7,10 +7,12 @@ import Barcode from 'react-barcode';
 
 const EditProductComponent = ({ productId }) => {
     const [viewProduct, setViewProduct] = useState([]);
-    const [itemName, setItemName] = useState(viewProduct.product_name);
-    const [itemDescription, setItemDescription] = useState(viewProduct.product_description);
-    const [itemPrice, setItemPrice] = useState(viewProduct.product_amount);
-    const [itemAvailableQuantity, setItemAvailableQuantity] = useState(viewProduct.product_available_amount);
+    const [productName, setProductName] = useState(viewProduct.product_name);
+    const [productDescription, setProductDescription] = useState(viewProduct.product_description);
+    const [productPrice, setProductPrice] = useState(viewProduct.product_amount);
+    const [productAvailableQuantity, setProductAvailableQuantity] = useState(viewProduct.product_available_amount);
+    const [validatedForm, setValidatedForm] = useState(false);
+    const [validationErrors, setValidationErrors] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,53 +20,102 @@ const EditProductComponent = ({ productId }) => {
           .then(response => response.json())
           .then(data => {
                 setViewProduct(data);
-                setItemName(data.product_name);
-                setItemDescription(data.product_description);
-                setItemPrice(data.product_amount);
-                setItemAvailableQuantity(data.product_available_quantity);
+                setProductName(data.product_name);
+                setProductDescription(data.product_description);
+                setProductPrice(data.product_amount);
+                setProductAvailableQuantity(data.product_available_quantity);
             })
           .catch(error => console.error('Error fetching tasks:', error));
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setValidatedForm(true);
 
         const data = {
-            product_name: itemName,
-            product_description: itemDescription,
-            product_amount: itemPrice,
-            product_available_quantity: itemAvailableQuantity,
+            product_name: productName,
+            product_description: productDescription,
+            product_amount: productPrice,
+            product_available_quantity: productAvailableQuantity,
         };
 
         axios.put('http://127.0.0.1:8000/api/update_product/' + productId, data)
-                .then(response => {navigate('/dashboard')})
-                .catch(error => console.error('Error updating a product: ', error));
+                .then(response => {
+                    navigate('/dashboard');
+                })
+                .catch(error => {
+                    if(error.response && error.response.status === 422) {
+                        const backEndErrors = error.response.data.validationErrors;
+                        setValidationErrors(backEndErrors);
+                    } else {
+                        console.error('Error updating product: ', error);
+                    }
+                });
+    }
+
+    const handleInputChange = (setter, errorName) => (event) => {
+        setter(event.target.value);
+        if(validatedForm)
+            setValidationErrors((prev) => ({...prev, [errorName]: null}));
     }
 
     return (
         <div>
             <div className='fieldsContainer'>
                 <h1 className='text-center'>Edit Product</h1>
-                <Form onSubmit={handleSubmit}>
+                <Form noValidate validated={validatedForm} onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Barcode:
                         <Barcode value={viewProduct.product_barcode}  width={2} height={50}/></Form.Label>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type='text' placeholder={viewProduct.product_name} value={itemName} onChange={(e) => setItemName(e.target.value)}/>
+                        <Form.Control 
+                            type='text' 
+                            placeholder={viewProduct.product_name} 
+                            value={productName} 
+                            onChange={handleInputChange(setProductName, 'product_name')} 
+                            isInvalid={!!validationErrors.product_name}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">{validationErrors.product_name ? validationErrors.product_name[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as='textarea' placeholder={viewProduct.product_description} value={itemDescription} onChange={(e) => setItemDescription(e.target.value)} />
+                        <Form.Control 
+                            as='textarea' 
+                            placeholder={viewProduct.product_description} 
+                            value={productDescription} 
+                            onChange={handleInputChange(setProductDescription, 'product_description')} 
+                            isInvalid={!!validationErrors.product_description}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">{validationErrors.product_description ? validationErrors.product_description[0] : null}</Form.Control.Feedback>    
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Price</Form.Label>
-                        <Form.Control type='number' step='any' placeholder={viewProduct.product_amount} value={itemPrice} onChange={(e) => setItemPrice(e.target.value)} />
+                        <Form.Control 
+                            type='number' 
+                            step='any' 
+                            placeholder={viewProduct.product_amount} 
+                            value={productPrice} 
+                            onChange={handleInputChange(setProductPrice, 'product_amount')} 
+                            isInvalid={!!validationErrors.product_amount}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">{validationErrors.product_amount ? validationErrors.product_amount[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Quantity</Form.Label>
-                        <Form.Control type='number' placeholder={viewProduct.product_available_quantity} value={itemAvailableQuantity} onChange={(e) => setItemAvailableQuantity(e.target.value)} />
+                        <Form.Control 
+                            type='number' 
+                            placeholder={viewProduct.product_available_quantity} 
+                            value={productAvailableQuantity} 
+                            onChange={handleInputChange(setProductAvailableQuantity, 'product_available_quantity')} 
+                            isInvalid={!!validationErrors.product_available_quantity}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">{validationErrors.product_available_quantity ? validationErrors.product_available_quantity[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <div className="submitContainer">
                         <button className="btn btn-primary" type='submit'>Submit</button>
