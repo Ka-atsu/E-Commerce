@@ -5,6 +5,7 @@ import './dashboardComponent.css';
 import { Link } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import DeleteProductFrame from './DeleteProductFrame';
+import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa';
 
 const DashboardFrame = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -86,30 +87,37 @@ const DashboardFrame = () => {
                             <div className="productActions">
                                 <ListGroup horizontal>
                                     <ListGroup.Item>
-                                        <Link to={`/editproduct/${product.id}`} style={{ textDecoration: "none", color: 'inherit' }}>E</Link>
+                                        <Link to={`/editproduct/${product.id}`} style={{ textDecoration: "none", color: 'inherit' }}>
+                                            <FaEdit /> {/* Edit Icon */}
+                                        </Link>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                        <Link to={`/viewproduct/${product.id}`} style={{ textDecoration: "none", color: 'inherit' }}>V</Link>
+                                        <Link to={`/viewproduct/${product.id}`} style={{ textDecoration: "none", color: 'inherit' }}>
+                                            <FaEye /> {/* View Icon */}
+                                        </Link>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
-                                        <input type="button" value="X" onClick={() => handleDeleteClick(product)} />
+                                        {/* Delete Button with Trash Icon */}
+                                        <button onClick={() => handleDeleteClick(product)} style={{ background: 'none', border: 'none' }}>
+                                            <FaTrashAlt /> {/* Delete Icon */}
+                                        </button>
                                     </ListGroup.Item>
                                 </ListGroup>
                             </div>
                         </div>
                     ))}
                 </div>
-
-                 {showDeleteModal && productToDelete && (
+    
+                {showDeleteModal && productToDelete && (
                     <DeleteProductFrame
                         product={productToDelete}
                         handleClose={handleCloseModal}
                         onProductDeleted={handleProductDeleted}
                     />
-                )} 
+                )}
             </div>
         </div>
-    );
+    );    
 };
 
 export default DashboardFrame;
