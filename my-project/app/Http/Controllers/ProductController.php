@@ -47,9 +47,18 @@ class ProductController extends Controller
                 'product_name' => ['required', 'max:255'],
                 'product_description' => ['required'],
                 'product_category' => ['required'],
+                'product_amount' => ['required', 'numeric', 'regex:/^\d{1,8}(\.\d{1,2})?$/'],
                 'product_available_quantity' => ['required', 'numeric'],
-                'product_amount' => ['required', 'decimal:2'],
                 'product_barcode' => ['required'],
+            ], [
+                'product_name.required' => 'Please enter a name for the product.',
+                'product_name.max' =>  'The name of the product cannot exceed 255 characters.',
+                'product_description.required' => 'Please enter a description for the product.',
+                'product_category.required' => 'Please enter a category for the product',
+                'product_amount.required' => 'Please enter a price for the product.',
+                'product_amount.numeric' => 'The price of the product should be a numerical value',
+                'product_amount.regex' => 'The price of the product should not exceed 8 digits or exceed 2 decimal places',
+                'product_barcode.required' => 'Please enter a barcode for the product',
             ]);
 
             /* After validating the data, it will now proceed to add a product to the database. */
@@ -58,7 +67,7 @@ class ProductController extends Controller
 
         } catch (ValidationException $e) { /* If the data that has been sent has not been validated, the catch block will proceed to send error to the frontend. */
             return response()->json([
-                'errors' => $e->errors(),
+                'validationErrors' => $e->errors(),
             ], 422);
         }
     }
@@ -101,8 +110,17 @@ class ProductController extends Controller
             $validatedData = $request->validate([
                 'product_name' => ['required', 'max:255'],
                 'product_description' => ['required'],
-                'product_amount' => ['required', 'decimal:2'],
+                'product_amount' => ['required', 'numeric', 'regex:/^\d{1,8}(\.\d{1,2})?$/'],
                 'product_available_quantity' => ['required', 'numeric'],
+            ], [
+                'product_name.required' => 'Please enter a name for the product.',
+                'product_name.max' =>  'The name of the product cannot exceed 255 characters.',
+                'product_description.required' => 'Please enter a description for the product.',
+                'product_amount.required' => 'Please enter a price for the product.',
+                'product_amount.numeric' => 'The price of the product should be a numerical value',
+                'product_amount.regex' => 'The price of the product should not exceed 8 digits or exceed 2 decimal places', 
+                'product_available_quantity.required' => 'Please enter a quantity of the product.',
+                'product_available_quantity.numeric' => 'The quantity of the product should be a numerical value',
             ]);
             
             /* 

@@ -11,6 +11,8 @@ const AddProductComponent = () => {
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
     const [category, setCategory] = useState('');
+    const [errors, setErrors] = useState({});
+    const [validateForm, setValidateForm] = useState(false); 
 
     const navigate = useNavigate();
 
@@ -27,37 +29,47 @@ const AddProductComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const dataToBeAdded = new FormData();
-        dataToBeAdded.append('product_barcode', barcode); 
-        dataToBeAdded.append('product_name', name);
-        dataToBeAdded.append('product_description', description);
-        dataToBeAdded.append('product_amount', price);
-        dataToBeAdded.append('product_available_quantity', quantity);
-        dataToBeAdded.append('product_category', category);
+        setValidateForm(true);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/create_product', {
                 method: 'POST',
-                body: dataToBeAdded, 
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'product_barcode': barcode,
+                    'product_name': name,
+                    'product_description': description,
+                    'product_amount': price,
+                    'product_available_quantity': quantity,
+                    'product_category': category,
+                }), 
             });
 
-            if (response.ok) {
-                console.log("Product added successfully!");
+            if(response.status === 201) {
                 navigate('/dashboard');
-            } else {
-                console.error('Error submitting form:', response.statusText);
+            } else if(response.status === 422) {
+                const backEndErrors = await response.json();
+                setErrors(backEndErrors.validationErrors);
             }
+
         } catch (error) {
-            console.error('Error:', error);
+            console.error("An error occured", error);
         }
     };
+
+    const handleInputChange = (setter, errorName) => (event) => {
+        setter(event.target.value);
+        if(validateForm)
+            setErrors((prev) => ({...prev, [errorName]: null}));
+    }
 
     return (
         <div>
             <div className='fieldsContainer'>
                 <h1 className='text-center'>Add Product</h1>
-                <Form onSubmit={handleSubmit}>
+                <Form noValidate validated={validateForm} onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Product Code (Barcode)</Form.Label>
                         <Form.Control type='text' value={barcode} readOnly />
@@ -69,29 +81,34 @@ const AddProductComponent = () => {
 
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                        <Form.Control type='text' value={name} onChange={handleInputChange(setName, 'product_name')} isInvalid={!!errors.product_name} required/>
+                        <Form.Control.Feedback type="invalid">{errors.product_name ? errors.product_name[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as='textarea' value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <Form.Control as='textarea' value={description} onChange={handleInputChange(setDescription, 'product_description')} isInvalid={!!errors.product_description} required/>
+                        <Form.Control.Feedback type="invalid">{errors.product_description ? errors.product_description[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Price</Form.Label>
-                        <Form.Control type='number' value={price} onChange={(e) => setPrice(e.target.value)} />
+                        <Form.Control type='number' value={price} onChange={handleInputChange(setPrice, 'product_amount')} isInvalid={!!errors.product_amount} required/>
+                        <Form.Control.Feedback type="invalid">{errors.product_amount ? errors.product_amount[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Quantity</Form.Label>
-                        <Form.Control type='number' value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                        <Form.Control type='number' value={quantity} onChange={handleInputChange(setQuantity, 'product_available_quantity')} isInvalid={!!errors.product_available_quantity} required/>
+                        <Form.Control.Feedback type="invalid">{errors.product_available_quantity ? errors.product_available_quantity[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <Form.Select value={category} onChange={handleInputChange(setCategory, 'product_category')} isInvalid={!!errors.product_category} required>
                             <option value="">Select Category</option>
                             <option value="Sneakers">Sneakers</option>
                             <option value="Loafers">Loafers</option>
                             <option value="Cycling Shoes">Cycling Shoes</option>
                             <option value="Sandals">Sandals</option>
                         </Form.Select>
+                        <Form.Control.Feedback type="invalid">{errors.product_category ? errors.product_category[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <div className="submitContainer mt-4">
                         <button className="btn btn-primary" type='submit'>Submit</button>
