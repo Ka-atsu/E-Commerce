@@ -34,7 +34,7 @@ const LoginComponent = () => {
     <>
       <div className='loginContainer'>
         <div className="header text-center mb-5">
-          <h2>Login</h2>
+          <h2>ShoeFits</h2>
         </div>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formName" className="mb-3">
@@ -48,7 +48,7 @@ const LoginComponent = () => {
           </Form.Group>
 
           <div className="d-grid mb-3">
-            <Button variant="primary" type="submit" disabled={loading}>
+            <Button variant="info" type="submit" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner

@@ -34,8 +34,9 @@ const TopbarComponent = ({ onSearch }) => {
                     onChange={handleSearch}
                     disabled={isSearchDisabled} 
                 />
+                
             </Form>
-            <Link to="/addProduct" className="btn btn-primary">+ ADD PRODUCT</Link>
+            <Link to="/addProduct" className="btn btn-dark">+ ADD PRODUCT</Link>
         </header>
     );
 };

@@ -45,7 +45,7 @@ const SidebarComponent = ({ onCategoryChange  }) => {
 
     return (
         <div className='sidebar align-items-center'>
-            <h1>Site Name</h1>
+            <h1>ShoeFits</h1>
             <ul>
                 <li>
                     <Link to="/dashboard">Dashboard</Link>
