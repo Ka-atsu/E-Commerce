@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './dashboardComponent.css';
+import { Spinner } from 'react-bootstrap'; // Import Bootstrap's Spinner
 
 const SidebarComponent = ({ onCategoryChange  }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [disabled, setDisabled] = useState(false); // State to track whether checkboxes are disabled
+    const [loading, setLoading] = useState(false); // New state for loading spinner
 
     const categories = ['Sneakers', 'Loafers', 'Cycling Shoes', 'Sandals']; 
 
@@ -21,9 +23,15 @@ const SidebarComponent = ({ onCategoryChange  }) => {
         }
     }, [location.pathname, onCategoryChange]); // Dependency on pathname and onCategoryChange
 
-    const handleLogout = () => {
-        localStorage.removeItem('isAuthenticated'); 
-        navigate("/"); 
+    const handleLogout = async () => {
+        setLoading(true); // Start loading
+        localStorage.removeItem('isAuthenticated');
+        
+        // Simulate a delay for the logout process (optional)
+        setTimeout(() => {
+            setLoading(false); // Stop loading after sign out process
+            navigate("/"); 
+        }, 1500); // Simulate a delay of 1.5 seconds
     };
 
     const handleCategoryChange = (category) => {
@@ -60,7 +68,26 @@ const SidebarComponent = ({ onCategoryChange  }) => {
                     ))}
                 </li>
                 <li>
-                    <button className="customButton" onClick={handleLogout}>Sign Out</button>
+                    <button 
+                        className="customButton" 
+                        onClick={handleLogout} 
+                        disabled={loading} // Disable button during loading
+                    >
+                        {loading ? (
+                            <>
+                                <Spinner 
+                                    as="span" 
+                                    animation="border" 
+                                    size="sm" 
+                                    role="status" 
+                                    aria-hidden="true" 
+                                />{' '}
+                                ...
+                            </>
+                        ) : (
+                            'Sign Out'
+                        )}
+                    </button>
                 </li>
             </ul>
         </div>
