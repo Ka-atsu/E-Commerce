@@ -49,6 +49,11 @@
     gap: 2rem;
 }
 
+.sidebar input[type=checkbox]:hover {
+    border-color: aqua;
+    cursor: pointer;
+}
+
 .productGrid{     
     display: flex;
     flex-wrap: wrap; 
@@ -107,5 +112,9 @@
     cursor: pointer; 
     font-size: x-large;
     font-weight: 600;
+}
+
+.customButton:hover {
+    color: rgb(104, 21, 21);
 }
 

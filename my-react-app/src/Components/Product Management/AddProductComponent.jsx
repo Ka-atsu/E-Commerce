@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Barcode from 'react-barcode'; 
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';  // Import the Spinner component from react-bootstrap
 import './productComponent.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -12,16 +13,15 @@ const AddProductComponent = () => {
     const [quantity, setQuantity] = useState('');
     const [category, setCategory] = useState('');
     const [errors, setErrors] = useState({});
-    const [validateForm, setValidateForm] = useState(false); 
+    const [validateForm, setValidateForm] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false); // Add state to track form submission
 
     const navigate = useNavigate();
 
-    
     const generateProductCode = () => {
         return 'P-' + Math.floor(100000 + Math.random() * 900000);
     };
 
-    
     useEffect(() => {
         const generatedBarcode = generateProductCode();
         setBarcode(generatedBarcode);
@@ -30,6 +30,7 @@ const AddProductComponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setValidateForm(true);
+        setIsSubmitting(true); // Set to true when form submission starts
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/create_product', {
@@ -55,7 +56,9 @@ const AddProductComponent = () => {
             }
 
         } catch (error) {
-            console.error("An error occured", error);
+            console.error("An error occurred", error);
+        } finally {
+            setIsSubmitting(false); // Reset submission state after process completes
         }
     };
 
@@ -76,7 +79,7 @@ const AddProductComponent = () => {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Barcode</Form.Label>
-                        <Barcode value={barcode}  width={2} height={50}/> 
+                        <Barcode value={barcode} width={2} height={50}/> 
                     </Form.Group>
 
                     <Form.Group>
@@ -111,7 +114,13 @@ const AddProductComponent = () => {
                         <Form.Control.Feedback type="invalid">{errors.product_category ? errors.product_category[0] : null}</Form.Control.Feedback>
                     </Form.Group>
                     <div className="submitContainer mt-4">
-                        <button className="btn btn-primary" type='submit'>Submit</button>
+                        <button className="btn btn-primary" type='submit' disabled={isSubmitting}>
+                            {isSubmitting ? (
+                                <>
+                                    <Spinner animation="border" size="sm" /> Submitting...
+                                </>
+                            ) : 'Submit'}
+                        </button>
                         <Link to="/dashboard" className="btn btn-secondary" role="button">Cancel</Link>
                     </div>
                 </Form>
