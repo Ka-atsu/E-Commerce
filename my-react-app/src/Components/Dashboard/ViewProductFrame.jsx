@@ -43,7 +43,7 @@ const ViewProductFrame = () => {
                                 <hr/>
                                 <label>Product Name: {viewProduct.product_name}</label><br />
                                 <label>Description: {viewProduct.product_description}</label><br />
-                                <label>Price: ${parseFloat(viewProduct.product_amount).toFixed(2)}</label><br />
+                                <label>Price: ₱{parseFloat(viewProduct.product_amount).toFixed(2)}</label><br />
                                 <label>Category: {viewProduct.product_category}</label><br />
                                 <label>Quantity: {viewProduct.product_available_quantity}</label><br />
                                 <hr/>

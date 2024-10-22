@@ -38,8 +38,8 @@ const LoginComponent = () => {
         </div>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formName" className="mb-3">
-            <Form.Label>Name</Form.Label> 
-            <Form.Control type="text" placeholder="Enter your email" value={name} onChange={(e) => setName(e.target.value)} required />
+            <Form.Label>Username</Form.Label> 
+            <Form.Control type="text" placeholder="Enter your username" value={name} onChange={(e) => setName(e.target.value)} required />
           </Form.Group>
 
           <Form.Group controlId="formPassword" className="mb-3">
