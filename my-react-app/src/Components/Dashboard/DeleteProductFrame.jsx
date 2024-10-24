@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 const DeleteProductFrame = ({ product, handleClose, onProductDeleted }) => {
     const productId = product.id;
-    const productName = product.item_name;
+    const productName = product.product_name;
 
     const handleDeleteProduct = () => {
         fetch(`http://127.0.0.1:8000/api/delete_product/${productId}`,{

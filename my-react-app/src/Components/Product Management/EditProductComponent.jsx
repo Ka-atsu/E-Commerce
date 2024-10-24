@@ -74,16 +74,7 @@ const EditProductComponent = ({ productId }) => {
                         <Barcode value={viewProduct.product_barcode} width={2} height={50} /></Form.Label>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder={viewProduct.product_name}
-                            value={productName}
-                            onChange={handleInputChange(setProductName, 'product_name')}
-                            isInvalid={!!validationErrors.product_name}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">{validationErrors.product_name ? validationErrors.product_name[0] : null}</Form.Control.Feedback>
+                        <Form.Label>Name: {viewProduct.product_name}</Form.Label>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Description</Form.Label>

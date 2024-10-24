@@ -108,13 +108,10 @@ class ProductController extends Controller
         try{
                 /* Validating Data being sent to the Backend */
             $validatedData = $request->validate([
-                'product_name' => ['required', 'max:255'],
                 'product_description' => ['required'],
                 'product_amount' => ['required', 'numeric', 'regex:/^\d{1,8}(\.\d{1,2})?$/'],
                 'product_available_quantity' => ['required', 'numeric'],
             ], [
-                'product_name.required' => 'Please enter a name for the product.',
-                'product_name.max' =>  'The name of the product cannot exceed 255 characters.',
                 'product_description.required' => 'Please enter a description for the product.',
                 'product_amount.required' => 'Please enter a price for the product.',
                 'product_amount.numeric' => 'The price of the product should be a numerical value',
@@ -128,7 +125,6 @@ class ProductController extends Controller
                 the product's name, description, amount, and its quantity.
             */
             $updateItem = Product::find($id);
-            $updateItem->product_name = $validatedData['product_name'];
             $updateItem->product_description = $validatedData['product_description'];
             $updateItem->product_amount = $validatedData['product_amount'];
             $updateItem->product_available_quantity = $validatedData['product_available_quantity'];
