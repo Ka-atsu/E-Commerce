@@ -5,6 +5,7 @@ import DashboardFrame from './Components/Dashboard/DashboardFrame';
 import AddProductFrame from './Components/Dashboard/AddProductFrame';
 import EditProductFrame from './Components/Dashboard/EditProductFrame';
 import ViewProductFrame from './Components/Dashboard/ViewProductFrame';
+import ProductList from './Components/Front Store/ProductList';
 import ProtectedRoute from './ProtectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,6 +13,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" exact element={<LoginComponent />} />
+            <Route path="/productlist" exact element={<ProductList />} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardFrame /></ProtectedRoute>} />
             <Route path="/addproduct" element={<ProtectedRoute><AddProductFrame /></ProtectedRoute>} />
             <Route path="/editproduct/:id" element={<ProtectedRoute><EditProductFrame /></ProtectedRoute>} />
