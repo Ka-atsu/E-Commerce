@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import './CustomStyle.css';
 import UserSideNavComponent from "./UserSideNavComponent";
@@ -45,7 +48,7 @@ const ProductList = () => {
           <Row className="gy-1 gx-2">
             {filteredProducts.map((product) => (
               <Col key={product.id} md={3}>
-                <Link to={`/product/${product.id}`} className="text-decoration-none">
+                <Link to={`/viewuserproduct/${product.id}`} className="text-decoration-none">
                   <Card className="h-100 custom-card">
                     <Card.Body className="d-flex flex-column">
                       <Card.Title>{product.product_name}</Card.Title>

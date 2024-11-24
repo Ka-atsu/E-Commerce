@@ -1,5 +1,7 @@
 import React from 'react';
-import { Navbar, Form, Container } from 'react-bootstrap';
+import Navbar from 'react-bootstrap/Navbar';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 
 const UserNavComponent = ({ handleSearch }) => {
