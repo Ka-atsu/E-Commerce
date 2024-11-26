@@ -4,23 +4,22 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        // Create 10 users with sample data
-        User::create([
-            'name' => 'Admin',
-            'password' => bcrypt('password123'), // Hashing the password
-        ]);
-
-        // // You can use a loop or factory for more users
-        // for ($i = 1; $i <= 9; $i++) {
-        //     User::create([
-        //         'name' => 'User ' . $i,
-        //         'password' => bcrypt('password' . $i), // Different passwords for each user
-        //     ]);
-        // }
+       
+            // Creating an admin user
+            User::create([
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => Hash::make('adminpassword'),
+                'contact' => '123-456-7890',
+                'role' => 'admin',  // Assigning the 'admin' role
+            ]);
+        
+        }
+        
     }
-}
+

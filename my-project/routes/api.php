@@ -17,6 +17,8 @@ use App\Http\Controllers\LoginController;
 */
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::post('/register', [LoginController::class, 'register']);
+
 Route::post('/create_product', [ProductController::class, 'store']);
 
 Route::get('/display_products', [ProductController::class, 'index']);
