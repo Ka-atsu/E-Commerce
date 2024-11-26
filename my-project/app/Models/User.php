@@ -12,7 +12,10 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'password', // Make sure to hash passwords when storing them
+        'email',
+        'contact',
+        'password',
+        'role',    // Make sure to hash passwords when storing them
     ];
 
     protected $hidden = [

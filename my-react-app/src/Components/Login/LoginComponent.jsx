@@ -21,23 +21,34 @@ const LoginComponent = () => {
 
     try {
       if (isRegistering) {
-        // // Registration logic
-        // await axios.post('http://localhost:8000/api/register', {
-        //   name,
-        //   email,
-        //   contact,
-        //   password,
-        // });
-        // alert('Registration successful! You can now log in.');
-        // setIsRegistering(false);
+        // Registration logic
+        await axios.post('http://localhost:8000/api/register', {
+          name,
+          email,
+          contact,
+          password,
+        });
+        alert('Registration successful! You can now log in.');
+        setIsRegistering(false);
       } else {
         // Login logic
-        await axios.post('http://localhost:8000/api/login', {
+        const response = await axios.post('http://localhost:8000/api/login', {
           name,
           password,
         });
+
+        const { user } = response.data;
+
+        // Store user information in localStorage
         localStorage.setItem('isAuthenticated', true);
-        navigate('/dashboard');
+        localStorage.setItem('userRole', user.role); // Save the role for navigation
+
+        // Redirect based on user role
+        if (user.role === 'admin') {
+          navigate('/dashboard');
+        } else {
+          navigate('/productlist');
+        }
       }
     } catch (error) {
       setError(isRegistering ? 'Registration failed' : 'Invalid username or password');
