@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 
-const UserNavComponent = ({ handleSearch }) => {
+const UserNavComponent = ({ handleSearch, cartCount }) => {
   return (
     <Navbar bg="transparent" expand="lg" className="mb-4">
       <Container className="d-flex align-items-center justify-content-between mt-3">
@@ -26,7 +26,7 @@ const UserNavComponent = ({ handleSearch }) => {
         
         {/* Cart Link */}
         <Link to="/cart" className="btn btn-outline-dark btn-sm ms-auto">
-          Cart
+          Cart {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
         </Link>
       </Container>
     </Navbar>

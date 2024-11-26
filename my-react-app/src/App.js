@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LoginComponent from './Components/Login/LoginComponent';
 import DashboardFrame from './Components/Dashboard/DashboardFrame';
@@ -11,6 +11,13 @@ import ProtectedRoute from './ProtectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartCount(cart.reduce((acc, item) => acc + item.quantity, 0));
+    }, []);
+
     return (
         <Routes>
             <Route path="/" exact element={<LoginComponent />} />
@@ -18,8 +25,8 @@ function App() {
             <Route path="/addproduct" element={<ProtectedRoute><AddProductFrame /></ProtectedRoute>} />
             <Route path="/editproduct/:id" element={<ProtectedRoute><EditProductFrame /></ProtectedRoute>} />
             <Route path="/viewproduct/:id" element={<ProtectedRoute><ViewProductFrame /></ProtectedRoute>} />
-            <Route path="/productlist" element={<ProductList />} />
-            <Route path="/viewuserproduct/:id" element={<UserViewProductComponent />} />
+            <Route path="/productlist" element={<ProductList cartCount={cartCount} />} />
+            <Route path="/viewuserproduct/:id" element={<UserViewProductComponent cartCount={cartCount} setCartCount={setCartCount} />} />
         </Routes>
     );
 }
