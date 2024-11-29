@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import UserSideNavComponent from "./UserSideNavComponent";
 import UserNavComponent from "./UserNavComponent";
 
-const ProductList = ({ cartCount }) => {
+const ProductList = ({ cartItems = [] }) => {
     const [products, setProducts] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -38,9 +38,16 @@ const ProductList = ({ cartCount }) => {
         return matchesCategory && matchesSearch;
     });
 
+    // Calculate unique cart count using useMemo
+    const uniqueCartCount = React.useMemo(() => {
+        return cartItems.filter((item, index, self) =>
+            index === self.findIndex((t) => t.id === item.id) // Count only unique products
+        ).length;
+    }, [cartItems]);
+
     return (
         <>
-            <UserNavComponent handleSearch={handleSearch} cartCount={cartCount} />
+            <UserNavComponent handleSearch={handleSearch} cartCount={uniqueCartCount} />
             <div style={{ display: "flex" }}>
                 <UserSideNavComponent onCategoryChange={handleCategoryChange} />
                 <Container className="py-4">
@@ -65,7 +72,7 @@ const ProductList = ({ cartCount }) => {
                             </Col>
                         ))}
                     </Row>
- </Container>
+                </Container>
             </div>
         </>
     );

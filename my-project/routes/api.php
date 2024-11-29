@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +29,9 @@ Route::get('/view_product/{id}', [ProductController::class, 'show']);
 Route::put('/update_product/{id}', [ProductController::class, 'update']);
 
 Route::delete('/delete_product/{id}', [ProductController::class, 'destroy']);
+
+// Api routes for Add to Cart feature 
+Route::post('/cart/add', [CartController::class, 'addToCart']);
+Route::get('/cart', [CartController::class, 'getCart']);
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart']);
+Route::put('/cart/update/{id}', [CartController::class, 'updateCart']);

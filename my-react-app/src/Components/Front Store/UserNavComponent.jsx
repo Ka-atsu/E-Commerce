@@ -25,7 +25,7 @@ const UserNavComponent = ({ handleSearch, cartCount }) => {
         </Form>
         
         {/* Cart Link */}
-        <Link to="/cart" className="btn btn-outline-dark btn-sm ms-auto">
+        <Link to="/productcart" className="btn btn-outline-dark btn-sm ms-auto">
           Cart {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
         </Link>
       </Container>
