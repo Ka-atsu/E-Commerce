@@ -21,10 +21,38 @@ function App() {
     return (
         <Routes>
             <Route path="/" exact element={<LoginComponent />} />
-            <Route path="/dashboard" element={<ProtectedRoute><DashboardFrame /></ProtectedRoute>} />
-            <Route path="/addproduct" element={<ProtectedRoute><AddProductFrame /></ProtectedRoute>} />
-            <Route path="/editproduct/:id" element={<ProtectedRoute><EditProductFrame /></ProtectedRoute>} />
-            <Route path="/viewproduct/:id" element={<ProtectedRoute><ViewProductFrame /></ProtectedRoute>} />
+            <Route 
+                path="/dashboard" 
+                element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                        <DashboardFrame />
+                    </ProtectedRoute>
+                } 
+            />
+            <Route 
+                path="/addproduct" 
+                element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                        <AddProductFrame />
+                    </ProtectedRoute>
+                } 
+            />
+            <Route 
+                path="/editproduct/:id" 
+                element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                        <EditProductFrame />
+                    </ProtectedRoute>
+                } 
+            />
+            <Route 
+                path="/viewproduct/:id" 
+                element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                        <ViewProductFrame />
+                    </ProtectedRoute>
+                } 
+            />
             <Route path="/productlist" element={<ProductList cartCount={cartCount} />} />
             <Route path="/viewuserproduct/:id" element={<UserViewProductComponent cartCount={cartCount} setCartCount={setCartCount} />} />
         </Routes>

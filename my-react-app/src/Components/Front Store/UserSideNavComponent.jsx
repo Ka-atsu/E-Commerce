@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import './CustomStyle.css'
 
 const UserSideNavComponent = ({ onCategoryChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
