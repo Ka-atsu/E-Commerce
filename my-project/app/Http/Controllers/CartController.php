@@ -44,6 +44,17 @@ class CartController extends Controller
         return response()->json(['status' => 200, 'message' => 'Product added to cart successfully.']);
     }
 
+    public function getCartCount()
+
+    {
+
+        $uniqueProductCount = Cart::where('user_id', auth()->id())->distinct('product_id')->count('product_id');
+
+
+        return response()->json(['count' => $uniqueProductCount]);
+
+    }
+
     /**
      * Get the current cart.
      *

@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import UserSideNavComponent from "./UserSideNavComponent";
 import UserNavComponent from "./UserNavComponent";
 
-const ProductList = ({ cartItems = [] }) => {
+const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [cartCount, setCartCount] = useState(0); 
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/display_products")
@@ -19,6 +20,15 @@ const ProductList = ({ cartItems = [] }) => {
                 setProducts(data.products);
             })
             .catch((error) => console.error("Error fetching products: ", error));
+    }, []);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/cart/count')
+            .then((response) => response.json())
+            .then((data) => {
+                setCartCount(data.count);
+            })
+            .catch((error) => console.error("Error fetching cart count: ", error));
     }, []);
 
     const handleCategoryChange = (categories) => {
@@ -38,16 +48,9 @@ const ProductList = ({ cartItems = [] }) => {
         return matchesCategory && matchesSearch;
     });
 
-    // Calculate unique cart count using useMemo
-    const uniqueCartCount = React.useMemo(() => {
-        return cartItems.filter((item, index, self) =>
-            index === self.findIndex((t) => t.id === item.id) // Count only unique products
-        ).length;
-    }, [cartItems]);
-
     return (
         <>
-            <UserNavComponent handleSearch={handleSearch} cartCount={uniqueCartCount} />
+            <UserNavComponent handleSearch={handleSearch} cartCount={cartCount} />
             <div style={{ display: "flex" }}>
                 <UserSideNavComponent onCategoryChange={handleCategoryChange} />
                 <Container className="py-4">

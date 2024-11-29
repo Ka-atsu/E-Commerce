@@ -12,20 +12,6 @@ import ProtectedRoute from './ProtectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-    const [cartItems, setCartItems] = useState([]); // Initialize as an empty array
-    const [cartCount, setCartCount] = useState(0);
-
-    useEffect(() => {
-        // Example fetch call to populate cartItems (this can be modified based on your API)
-        fetch('http://127.0.0.1:8000/api/cart')
-            .then(response => response.json())
-            .then(data => {
-                setCartItems(data.cart || []); // Ensure it's an array
-                setCartCount(data.cart.length);
-            })
-            .catch(error => console.error("Error fetching cart items:", error));
-    }, []);
-
     return (
         <Routes>
             <Route path="/" exact element={<LoginComponent />} />
@@ -33,9 +19,9 @@ function App() {
             <Route path="/addproduct" element={<ProtectedRoute allowedRoles={['admin']}><AddProductFrame /></ProtectedRoute>} />
             <Route path="/editproduct/:id" element={<ProtectedRoute allowedRoles={['admin']}><EditProductFrame /></ProtectedRoute>} />
             <Route path="/viewproduct/:id" element={<ProtectedRoute allowedRoles={['admin']}><ViewProductFrame /></ProtectedRoute>} />
-            <Route path="/productlist" element={<ProductList cartItems={cartItems}/>} />
-            <Route path="/productcart" element={<CartComponent setCartCount={setCartCount} />} />
-            <Route path="/viewuserproduct/:id" element={<UserViewProductComponent  cartItems={cartItems} setCartItems={setCartItems} />} />
+            <Route path="/productlist" element={<ProductList/>} />
+            <Route path="/productcart" element={<CartComponent />} />
+            <Route path="/viewuserproduct/:id" element={<UserViewProductComponent />} />
         </Routes>
     );
 }

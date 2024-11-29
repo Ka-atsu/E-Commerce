@@ -35,3 +35,4 @@ Route::post('/cart/add', [CartController::class, 'addToCart']);
 Route::get('/cart', [CartController::class, 'getCart']);
 Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart']);
 Route::put('/cart/update/{id}', [CartController::class, 'updateCart']);
+Route::get('/cart/count', [CartController::class, 'getCartCount']);
