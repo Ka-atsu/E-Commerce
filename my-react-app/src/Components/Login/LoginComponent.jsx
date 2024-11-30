@@ -42,6 +42,7 @@ const LoginComponent = () => {
         // Store user information in localStorage
         localStorage.setItem('isAuthenticated', true);
         localStorage.setItem('userRole', user.role); // Save the role for navigation
+        localStorage.setItem('userId', user.id); // Save the user ID for cart count
 
         // Redirect based on user role
         if (user.role === 'admin') {

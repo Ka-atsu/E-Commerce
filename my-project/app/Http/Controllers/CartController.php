@@ -18,6 +18,7 @@ class CartController extends Controller
     {
         // Validate incoming request data
         $validatedData = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
             'product_id' => 'required|integer|exists:products,id', 
             'name' => 'required|string',
             'amount' => 'required|numeric',
@@ -34,21 +35,22 @@ class CartController extends Controller
         } else {
             // Add the new product to the cart
             Cart::create([
+                'user_id' => $validatedData['user_id'],
                 'product_id' => $validatedData['product_id'],
                 'name' => $validatedData['name'],
                 'amount' => $validatedData['amount'],
                 'quantity' => $validatedData['quantity'],
             ]);
         }
-
+        
         return response()->json(['status' => 200, 'message' => 'Product added to cart successfully.']);
     }
 
-    public function getCartCount()
+    public function getCartCount($user_id)
 
     {
 
-        $uniqueProductCount = Cart::where('user_id', auth()->id())->distinct('product_id')->count('product_id');
+        $uniqueProductCount = Cart::where('user_id', $user_id)->distinct('product_id')->count('product_id');
 
 
         return response()->json(['count' => $uniqueProductCount]);
@@ -60,10 +62,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCart()
+    public function getCart($user_id)
     {
         // Retrieve the cart items for the authenticated user
-        $cart = Cart::where('user_id', auth()->id())->get();
+        $cart = Cart::where('user_id', $user_id)->get();
 
         return response()->json(['status' => 200, 'cart' => $cart]);
     }
@@ -74,10 +76,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function removeFromCart($id)
+    public function removeFromCart($user_id, $id)
     {
         // Find the cart item for the authenticated user
-        $cartItem = Cart::where('id', $id)->where('user_id', auth()->id())->first();
+        $cartItem = Cart::where('id', $id)->where('user_id', $user_id)->first();
 
         if ($cartItem) {
             $cartItem->delete(); // Remove the product from the cart
@@ -86,7 +88,7 @@ class CartController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Product removed from cart successfully.',
-            'cart' => Cart::where('user_id', auth()->id())->get(),
+            'cart' => Cart::where('user_id', $user_id)->get(),
         ]);
     }
 
@@ -97,7 +99,7 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateCart(Request $request, $id)
+    public function updateCart(Request $request, $user_id, $id)
     {
         // Validate incoming request data
         $validatedData = $request->validate([
@@ -105,7 +107,7 @@ class CartController extends Controller
         ]);
 
         // Find the cart item for the authenticated user
-        $cartItem = Cart::where('id', $id)->where('user_id', auth()->id())->first();
+        $cartItem = Cart::where('id', $id)->where('user_id', $user_id)->first();
 
         if ($cartItem) {
             $cartItem->quantity = $validatedData['quantity']; // Update the quantity
@@ -115,7 +117,7 @@ class CartController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Cart updated successfully.',
-            'cart' => Cart::where('user_id', auth()->id())->get(),
+            'cart' => Cart::where('user_id', $user_id)->get(),
         ]);
     }
 }

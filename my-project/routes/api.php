@@ -32,7 +32,7 @@ Route::delete('/delete_product/{id}', [ProductController::class, 'destroy']);
 
 // Api routes for Add to Cart feature 
 Route::post('/cart/add', [CartController::class, 'addToCart']);
-Route::get('/cart', [CartController::class, 'getCart']);
-Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart']);
-Route::put('/cart/update/{id}', [CartController::class, 'updateCart']);
-Route::get('/cart/count', [CartController::class, 'getCartCount']);
+Route::get('/cart/{user_id}', [CartController::class, 'getCart']);
+Route::delete('/cart/remove/{user_id}/{id}', [CartController::class, 'removeFromCart']);
+Route::put('/cart/update/{user_id}/{id}', [CartController::class, 'updateCart']);
+Route::get('/cart/count/{user_id}', [CartController::class, 'getCartCount']);

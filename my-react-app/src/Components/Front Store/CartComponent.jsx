@@ -5,10 +5,11 @@ const CartComponent = () => {
     const [grandTotal, setGrandTotal] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
     const [uniqueProductCount, setUniqueProductCount] = useState(0); // State to hold unique product count
+    const userId = localStorage.getItem('userId');
 
     const fetchCart = useCallback(async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/cart'); // Adjust the endpoint as necessary
+            const response = await fetch(`http://127.0.0.1:8000/api/cart/${userId}`); // Adjust the endpoint as necessary
             if (!response.ok) {
                 throw new Error('Failed to fetch cart');
             }
@@ -23,7 +24,7 @@ const CartComponent = () => {
             setGrandTotal(total);
 
             // Fetch unique product count from the API
-            const countResponse = await fetch('http://127.0.0.1:8000/api/cart/count'); // Fetch unique product count
+            const countResponse = await fetch(`http://127.0.0.1:8000/api/cart/count/${userId}`); // Fetch unique product count
             if (!countResponse.ok) {
                 throw new Error('Failed to fetch unique product count');
             }
@@ -41,7 +42,7 @@ const CartComponent = () => {
 
     const handleRemove = async (id) => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/cart/remove/${id}`, { // Adjusted endpoint
+            const response = await fetch(`http://127.0.0.1:8000/api/cart/remove/${userId}/${id}`, { // Adjusted endpoint
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -57,7 +58,7 @@ const CartComponent = () => {
     const handleUpdateQuantity = async (id, quantity) => {
         if (quantity < 1) return; // Prevent setting quantity to less than 1
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/cart/update/${id}`, { // Adjusted endpoint
+            const response = await fetch(`http://127.0.0.1:8000/api/cart/update/${userId}/${id}`, { // Adjusted endpoint
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

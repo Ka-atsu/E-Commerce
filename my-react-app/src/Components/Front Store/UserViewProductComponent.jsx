@@ -11,6 +11,7 @@ const UserViewProductComponent = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [cartCount, setCartCount] = useState(0); // Local cart count state
     const { id } = useParams();
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -28,7 +29,7 @@ const UserViewProductComponent = () => {
 
         const fetchCartCount = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/cart/count');
+                const response = await fetch(`http://127.0.0.1:8000/api/cart/count/${userId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch cart count');
                 }
@@ -45,11 +46,12 @@ const UserViewProductComponent = () => {
 
     const handleAddToCart = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/cart/add', {
+            const response = await fetch(`http://127.0.0.1:8000/api/cart/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     product_id: viewProduct.id,
+                    user_id: userId,
                     name: viewProduct.product_name,
                     amount: viewProduct.product_amount,
                     quantity: 1,
@@ -62,7 +64,7 @@ const UserViewProductComponent = () => {
             setFeedbackMessage(`${viewProduct.product_name} has been added to your cart!`);
 
             // Fetch the updated cart count
-            const countResponse = await fetch('http://127.0.0.1:8000/api/cart/count');
+            const countResponse = await fetch(`http://127.0.0.1:8000/api/cart/count/${userId}`);
             if (!countResponse.ok) {
                 throw new Error('Failed to fetch updated cart count');
             }

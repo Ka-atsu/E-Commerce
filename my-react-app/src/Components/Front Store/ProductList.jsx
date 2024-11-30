@@ -11,7 +11,8 @@ const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [cartCount, setCartCount] = useState(0); 
+    const [cartCount, setCartCount] = useState(0);
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/display_products")
@@ -23,7 +24,7 @@ const ProductList = () => {
     }, []);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/cart/count')
+        fetch(`http://127.0.0.1:8000/api/cart/count/${userId}`)
             .then((response) => response.json())
             .then((data) => {
                 setCartCount(data.count);
