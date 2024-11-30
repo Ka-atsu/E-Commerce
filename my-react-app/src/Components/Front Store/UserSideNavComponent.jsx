@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import './CustomStyle.css'
+import { useLocation, useNavigate } from "react-router-dom";
+import './CustomStyle.css';
+import { Spinner } from 'react-bootstrap';
 
 const UserSideNavComponent = ({ onCategoryChange }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const categories = ['Sneakers', 'Loafers', 'Cycling Shoes', 'Sandals'];
   const location = useLocation();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // New state for loading spinner
 
   useEffect(() => {
     if (location.pathname === "/productlist") {
@@ -24,6 +27,17 @@ const UserSideNavComponent = ({ onCategoryChange }) => {
       : [...selectedCategories, category];
     setSelectedCategories(newSelection);
     onCategoryChange(newSelection); // Notify parent component about the category change
+  };
+
+  const handleLogout = async () => {
+    setLoading(true); // Start loading
+    localStorage.removeItem('isAuthenticated');
+    
+    // Simulate a delay for the logout process (optional)
+    setTimeout(() => {
+        setLoading(false); // Stop loading after sign out process
+        navigate("/"); 
+    }, 1500); // Simulate a delay of 1.5 seconds
   };
 
   return (
@@ -48,6 +62,27 @@ const UserSideNavComponent = ({ onCategoryChange }) => {
           ))}
         </li>
       </ul>
+
+    <button 
+      className="customButton" 
+      onClick={handleLogout} 
+      disabled={loading} // Disable button during loading
+    >
+    {loading ? (
+      <>
+        <Spinner 
+          as="span" 
+          animation="border" 
+          size="sm" 
+          role="status" 
+          aria-hidden="true" 
+          />{' '}
+          ...
+          </>
+          ) : (
+          'Sign Out'
+          )}
+      </button>
     </div>
   );
 };
