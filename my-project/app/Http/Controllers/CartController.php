@@ -26,7 +26,9 @@ class CartController extends Controller
         ]);
 
         // Check if the product already exists in the cart
-        $cartItem = Cart::where('product_id', $validatedData['product_id'])->first();
+        $cartItem = Cart::where('product_id', $validatedData['product_id'])
+                    ->where('user_id', $validatedData['user_id'])
+                    ->first();
 
         if ($cartItem) {
             // Update the quantity if the product is already in the cart
