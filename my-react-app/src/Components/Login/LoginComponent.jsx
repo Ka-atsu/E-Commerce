@@ -9,15 +9,51 @@ const LoginComponent = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false); // Toggle between login and sign-up
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const evaluatePasswordStrength = (pwd) => {
+    if (!pwd) return '';
+  
+    // Weak: 1-7 characters OR doesn't satisfy conditions for Medium or Strong.
+    if (pwd.length < 8) return 'Weak';
+  
+    const hasLower = /[a-z]/.test(pwd);
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasNumber = /\d/.test(pwd);
+  
+    // Medium: Minimum 8 characters, with numbers and upper+lowercase letters.
+    if (pwd.length >= 8 && hasLower && hasUpper && hasNumber) {
+      // Strong: Minimum 10 characters, with numbers, upper+lowercase letters, and special characters.
+      const hasSpecial = /[!@#$%^&*_]/.test(pwd);
+      if (pwd.length >= 10 && hasSpecial) return 'Strong';
+      return 'Medium';
+    }
+  
+    return 'Weak';
+  };
+  
+  const handlePasswordChange = (e) => {
+    const newPwd = e.target.value;
+    setPassword(newPwd);
+    if (isRegistering) {
+      setPasswordStrength(evaluatePasswordStrength(newPwd));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    if (isRegistering && passwordStrength === 'Weak') {
+      setError('Password is weak. Please choose a stronger password.');
+      setLoading(false);
+      return;
+    }
 
     try {
       if (isRegistering) {
@@ -41,8 +77,8 @@ const LoginComponent = () => {
 
         // Store user information in localStorage
         localStorage.setItem('isAuthenticated', true);
-        localStorage.setItem('userRole', user.role); // Save the role for navigation
-        localStorage.setItem('userId', user.id); // Save the user ID for cart count
+        localStorage.setItem('userRole', user.role);
+        localStorage.setItem('userId', user.id);
 
         // Redirect based on user role
         if (user.role === 'admin') {
@@ -107,9 +143,22 @@ const LoginComponent = () => {
             type="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
+          {isRegistering && password && (
+            <small
+              className={`password-strength text-${
+                passwordStrength === 'Strong'
+                  ? 'success'
+                  : passwordStrength === 'Medium'
+                  ? 'warning'
+                  : 'danger'
+              }`}
+            >
+              Password Strength: {passwordStrength}
+            </small>
+          )}
         </Form.Group>
 
         <div className="d-grid mb-3">
