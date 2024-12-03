@@ -15,6 +15,11 @@ const LoginComponent = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const evaluatePasswordStrength = (pwd) => {
     if (!pwd) return '';
   
@@ -49,11 +54,20 @@ const LoginComponent = () => {
     setLoading(true);
     setError('');
 
-    if (isRegistering && passwordStrength === 'Weak') {
-      setError('Password is weak. Please choose a stronger password.');
-      setLoading(false);
-      return;
+    if (isRegistering) {
+      if (!validateEmail(email)) {
+        setError('Invalid email address');
+        setLoading(false);
+        return;
+      }
+
+      if (passwordStrength === 'Weak') {
+        setError('Password is weak. Please choose a stronger password.');
+        setLoading(false);
+        return;
+      }
     }
+
 
     try {
       if (isRegistering) {
@@ -122,6 +136,9 @@ const LoginComponent = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+               {error && !validateEmail(email) && (
+                <small className="text-danger">Invalid email address</small>
+              )}
             </Form.Group>
 
             <Form.Group controlId="formContact" className="mb-3">
