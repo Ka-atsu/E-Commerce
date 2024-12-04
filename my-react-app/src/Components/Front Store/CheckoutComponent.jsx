@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -97,6 +97,8 @@ const CheckoutComponent = () => {
             <h2 className="text-center mb-4">Checkout</h2>
             {successMessage && <Alert variant="success">{successMessage}</Alert>}
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+
+            <Link to="/productcart" className="btn btn-outline-secondary mb-3">Back</Link>
             <Stack gap={4}>
                 <Card className="shadow-sm">
                     <Card.Body>
