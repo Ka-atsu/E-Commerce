@@ -7,8 +7,8 @@ const SidebarComponent = ({ onCategoryChange  }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [disabled, setDisabled] = useState(false); // State to track whether checkboxes are disabled
-    const [loading, setLoading] = useState(false); // New state for loading spinner
+    const [disabled, setDisabled] = useState(false); 
+    const [loading, setLoading] = useState(false); 
 
     const categories = ['Sneakers', 'Loafers', 'Cycling Shoes', 'Sandals']; 
 
@@ -26,6 +26,11 @@ const SidebarComponent = ({ onCategoryChange  }) => {
     const handleLogout = async () => {
         setLoading(true); // Start loading
         localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userPhone');
         
         // Simulate a delay for the logout process (optional)
         setTimeout(() => {

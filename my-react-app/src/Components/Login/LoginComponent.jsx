@@ -30,6 +30,7 @@ const LoginComponent = () => {
         });
         alert('Registration successful! You can now log in.');
         setIsRegistering(false);
+
       } else {
         // Login logic
         const response = await axios.post('http://localhost:8000/api/login', {
@@ -38,11 +39,12 @@ const LoginComponent = () => {
         });
 
         const { user } = response.data;
-
-        // Store user information in localStorage
         localStorage.setItem('isAuthenticated', true);
-        localStorage.setItem('userRole', user.role); // Save the role for navigation
-        localStorage.setItem('userId', user.id); // Save the user ID for cart count
+        localStorage.setItem('userRole', user.role); 
+        localStorage.setItem('userId', user.id); 
+        localStorage.setItem('userName', user.name); 
+        localStorage.setItem('userEmail', user.email); 
+        localStorage.setItem('userPhone', user.contact); 
 
         // Redirect based on user role
         if (user.role === 'admin') {

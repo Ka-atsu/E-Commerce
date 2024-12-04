@@ -4,15 +4,14 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
-    const userRole = localStorage.getItem('userRole'); // Get the user role from localStorage
+    const userRole = localStorage.getItem('userRole'); 
 
     if (!isAuthenticated) {
         return <Navigate to="/" replace />;
     }
-
-    // Check if the user's role is allowed
+    
     if (allowedRoles && !allowedRoles.includes(userRole)) {
-        return <Navigate to="/productlist" replace />; // Redirect to product list if not authorized
+        return <Navigate to="/productlist" replace />; 
     }
 
     return children;

@@ -32,6 +32,11 @@ const UserSideNavComponent = ({ onCategoryChange }) => {
   const handleLogout = async () => {
     setLoading(true); // Start loading
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userPhone');
     
     // Simulate a delay for the logout process (optional)
     setTimeout(() => {
@@ -64,19 +69,13 @@ const UserSideNavComponent = ({ onCategoryChange }) => {
       </ul>
 
     <button 
-      className="customButton" 
+      className="customButtonFront" 
       onClick={handleLogout} 
-      disabled={loading} // Disable button during loading
+      disabled={loading} 
     >
     {loading ? (
       <>
-        <Spinner 
-          as="span" 
-          animation="border" 
-          size="sm" 
-          role="status" 
-          aria-hidden="true" 
-          />{' '}
+        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/>{' '}
           ...
           </>
           ) : (

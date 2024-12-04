@@ -94,6 +94,24 @@ class CartController extends Controller
         ]);
     }
 
+    public function clearCart($user_id)
+    {
+        // Find and delete all cart items for the user
+        $deleted = Cart::where('user_id', $user_id)->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Cart cleared successfully.',
+            ]);
+        }
+
+        return response()->json([
+            'status' => 404,
+            'message' => 'No items found in cart to clear.',
+        ]);
+    }
+
     /**
      * Update the quantity of a product in the cart.
      *

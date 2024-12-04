@@ -34,5 +34,6 @@ Route::delete('/delete_product/{id}', [ProductController::class, 'destroy']);
 Route::post('/cart/add', [CartController::class, 'addToCart']);
 Route::get('/cart/{user_id}', [CartController::class, 'getCart']);
 Route::delete('/cart/remove/{user_id}/{id}', [CartController::class, 'removeFromCart']);
+Route::delete('/cart/clear/{user_id}', [CartController::class, 'clearCart']);
 Route::put('/cart/update/{user_id}/{id}', [CartController::class, 'updateCart']);
 Route::get('/cart/count/{user_id}', [CartController::class, 'getCartCount']);
