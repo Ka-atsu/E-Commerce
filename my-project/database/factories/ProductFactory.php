@@ -11,13 +11,26 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $shoeCategories = ['Sneakers', 'Loafers', 'Cycling Shoes', 'Sandals'];
+        $productNames = ['Nike Air Max', 'Adidas Boost', 
+                        'New Balance 574', 'Puma RS-X', 
+                        'Vans Old Skool', 'Converse Chuck Taylor', 
+                        'Fila Disruptor', 'Asics Gel', 
+                        'Reebok Classic', 'Under Armour', 
+                        'New Balance 990', 'Asics GEL-Kayano', 
+                        'Reebok CrossFit', 'Under Armour SpeedForm', 
+                        'New Balance 992', 'Asics GEL-Kayano', 
+                        'Reebok CrossFit', 'Under Armour SpeedForm', 
+                        'New Balance 992', 'Asics GEL-Kayano', 
+                        'Reebok CrossFit', 'Under Armour SpeedForm'];
+        
         return [
-            'product_name' => $this->faker->words(3, true), // Generate a product name
-            'product_description' => $this->faker->sentence(10), // Generate a description
-            'product_category' => $this->faker->word(), // Random category
-            'product_amount' => $this->faker->randomFloat(2, 10, 10000), // Price between 10.00 and 10,000.00
-            'product_available_quantity' => $this->faker->numberBetween(1, 100), // Quantity between 1 and 100
-            'product_barcode' => $this->faker->unique()->ean13(), // Unique 13-digit barcode
+            'product_name' => $this->faker->randomElement($productNames) . ' ' . $this->faker->colorName(),
+            'product_description' => $this->faker->sentence(10),
+            'product_category' => $this->faker->randomElement($shoeCategories),
+            'product_amount' => $this->faker->randomFloat(2, 49.99, 299.99),
+            'product_available_quantity' => $this->faker->numberBetween(1, 50),
+            'product_barcode' => 'P-' . $this->faker->unique()->numerify('##########'),
         ];
     }
 }
