@@ -55,19 +55,19 @@ const ProductList = () => {
             <div style={{ display: "flex" }}>
                 <UserSideNavComponent onCategoryChange={handleCategoryChange} />
                 <Container className="py-4">
-                    <Row className="gy-1 gx-2">
+                    <Row xs={1} md={2} lg={3} className="g-4"> {/* Adjust columns for responsiveness */}
                         {filteredProducts.map((product) => (
-                            <Col key={product.id} md={3}>
+                            <Col key={product.id}>
                                 <Link to={`/viewuserproduct/${product.id}`} className="text-decoration-none">
-                                <Card className="h-100 custom-card" style={{ backgroundColor: '#f5f5f5' }}>
+                                <Card className="h-100 custom-card" style={{ backgroundColor: 'white', width:'320px', borderColor:'#570303'}}>
                                     <Card.Body className="d-flex flex-column">
-                                        <Card.Title>{product.product_name}</Card.Title>
-                                        <Card.Text>{product.product_description}</Card.Text>
+                                        <Card.Title style={{backgroundColor:'white'}}>{product.product_name}</Card.Title>
+                                        <Card.Text style={{backgroundColor:'white'}}>{product.product_description}</Card.Text>
                                         <div className="mt-auto">
-                                            <Card.Text>
-                                                <strong>Price:</strong> ₱{parseFloat(product.product_amount).toFixed(2)}
+                                            <Card.Text style={{backgroundColor:'white'}}>
+                                                <strong style={{backgroundColor:'white'}}>Price:</strong> ₱{parseFloat(product.product_amount).toFixed(2)}
                                                 <br />
-                                                <strong>Availability:</strong> {product.product_available_quantity}
+                                                <strong style={{backgroundColor:'white'}}>Availability:</strong> {product.product_available_quantity}
                                             </Card.Text>
                                         </div>
                                     </Card.Body>
