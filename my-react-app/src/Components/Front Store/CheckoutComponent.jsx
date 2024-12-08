@@ -19,7 +19,6 @@ const CheckoutComponent = () => {
     const [paymentMethod, setPaymentMethod] = useState('cash-on-delivery');
     const [successMessage, setSuccessMessage] = useState('');
     const userName = localStorage.getItem('userName');
-    const userEmail = localStorage.getItem('userEmail');
     const userPhone = localStorage.getItem('userPhone');
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
@@ -140,7 +139,7 @@ const CheckoutComponent = () => {
                                                 <Card.Text>{item.name} (Quantity: {item.quantity})</Card.Text>
                                             </Col>
                                             <Col md={4} className="text-end">
-                                                <Card.Text>${price.toFixed(2)}</Card.Text>
+                                                <Card.Text>₱{price.toFixed(2)}</Card.Text>
                                             </Col>
                                         </Row>
                                     </Card.Body>
@@ -170,7 +169,7 @@ const CheckoutComponent = () => {
                         <Row className="mt-3">
                             <Col md={8}>
                                 <Card.Text className="text-end">
-                                    <strong>Order Total: ${grandTotal.toFixed(2)}</strong>
+                                    <strong>Order Total: ₱{grandTotal.toFixed(2)}</strong>
                                 </Card.Text>
                             </Col>
                             <Col md={4}>

@@ -137,8 +137,8 @@ const CartComponent = () => {
                                                 />
                                             </InputGroup>
                                         </td>
-                                        <td>${price.toFixed(2)}</td>
-                                        <td>${totalPrice.toFixed(2)}</td>
+                                        <td>₱{price.toFixed(2)}</td>
+                                        <td>₱{totalPrice.toFixed(2)}</td>
                                         <td>
                                             <Button
                                                 variant="danger"
@@ -156,7 +156,7 @@ const CartComponent = () => {
             )}
             <Row>
                 <Col className="text-end">
-                    <h3>Grand Total: ${grandTotal.toFixed(2)}</h3>
+                    <h3>Grand Total: ₱{grandTotal.toFixed(2)}</h3>
                 </Col>
             </Row>
         </Container>

@@ -82,7 +82,7 @@ const UserViewProductComponent = () => {
         <>
             <UserNavComponent cartCount={cartCount} />
             <Container>
-                <Link to="/productlist" className="btn btn-outline-secondary">Back</Link>
+                <Link to="/productlist" className="btn btn-outline-secondary mb-3">Back</Link>
                 {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                 {feedbackMessage && <div className="alert alert-success">{feedbackMessage}</div>}
                 <Row>
