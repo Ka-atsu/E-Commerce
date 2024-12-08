@@ -106,7 +106,24 @@ const LoginComponent = () => {
         }
       }
     } catch (error) {
-      setError(isRegistering ? 'Registration failed' : 'Invalid username or password');
+
+      if(!isRegistering)
+      {
+        setError('Invalid username or password');
+        return;
+      }
+
+      if(error.response && error.response.data)
+      {
+        const errors = error.response.data.errors;
+        if(errors)
+        {
+          const firstError = Object.values(errors)[0][0];
+          setError(firstError);
+        }
+
+        return;
+      }
     } finally {
       setLoading(false);
     }
