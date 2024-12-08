@@ -30,7 +30,7 @@ const TopbarComponent = ({ onSearch }) => {
             <Form className="d-flex">
                 <Form.Control
                     type="search"
-                    placeholder="Search for a product"
+                    placeholder="🔎︎ Search for a product"
                     className="me-1"
                     value={searchTerm}
                     onChange={handleSearch}

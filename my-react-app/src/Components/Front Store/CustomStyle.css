@@ -54,3 +54,8 @@ ul {
   border-color: aqua;
   cursor: pointer;
 }
+.me-2 {
+  font-size: 30px;
+  color: rgb(189, 126, 11);
+  background-color: transparent;
+}

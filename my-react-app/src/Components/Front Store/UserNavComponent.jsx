@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import logo from './logo.png'; // Import your logo image
+import { FaShoppingCart } from 'react-icons/fa'; // Import the cart icon
 
 const UserNavComponent = ({ handleSearch, cartCount }) => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const UserNavComponent = ({ handleSearch, cartCount }) => {
           <Form className="d-flex mx-auto" style={{ flexGrow: 1, maxWidth: '380px' }}>
             <Form.Control
               type="search"
-              placeholder="Search for a product"
+              placeholder="🔎︎ Search for a product"
               className="me-2"
               style={{ width: '100%', height: '38px', fontSize: '1rem' }}
               onChange={handleSearch} 
@@ -32,7 +33,8 @@ const UserNavComponent = ({ handleSearch, cartCount }) => {
         )}
 
         <Link to="/productcart" className="btn btn-outline-dark btn-sm ms-auto">
-          Cart {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
+          <FaShoppingCart className="me-2" /> 
+          {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
         </Link>
       </Container>
     </Navbar>
