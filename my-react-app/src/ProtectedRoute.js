@@ -11,7 +11,9 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     }
     
     if (allowedRoles && !allowedRoles.includes(userRole)) {
-        return <Navigate to="/productlist" replace />; 
+        return userRole === 'admin' 
+            ? <Navigate to="/dashboard" replace /> 
+            : <Navigate to="/productlist" replace />;
     }
 
     return children;
