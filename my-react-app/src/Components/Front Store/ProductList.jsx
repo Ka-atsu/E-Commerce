@@ -67,6 +67,8 @@ const ProductList = () => {
                                             <Card.Text style={{backgroundColor:'white'}}>
                                                 <strong style={{backgroundColor:'white'}}>Price:</strong> ₱{parseFloat(product.product_amount).toFixed(2)}
                                                 <br />
+                                                <strong style={{backgroundColor:'white'}}>Category:</strong> {product.product_category}
+                                                <br />
                                                 <strong style={{backgroundColor:'white'}}>Availability:</strong> {product.product_available_quantity}
                                             </Card.Text>
                                         </div>

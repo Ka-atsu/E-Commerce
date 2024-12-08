@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import UserNavComponent from "./UserNavComponent"; 
+import UserNavComponent from "./UserNavComponent";
 
 const UserViewProductComponent = () => {
     const [viewProduct, setViewProduct] = useState({});
@@ -91,7 +91,8 @@ const UserViewProductComponent = () => {
                         <p>{viewProduct.product_description}</p>
                         <p>Price: ₱{parseFloat(viewProduct.product_amount).toFixed(2)}</p>
                         <p>Available Quantity: {viewProduct.product_available_quantity}</p>
-                        <button 
+                        <p>Category: {viewProduct.product_category}</p>
+                        <button
                             className="btn btn-primary"
                             onClick={handleAddToCart}
                             disabled={viewProduct.product_available_quantity <= 0}
