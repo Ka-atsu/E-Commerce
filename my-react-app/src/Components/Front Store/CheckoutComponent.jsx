@@ -136,7 +136,7 @@ const CheckoutComponent = () => {
                                     <Card.Body>
                                         <Row>
                                             <Col md={8}>
-                                                <Card.Text>{item.name} (Quantity: {item.quantity})</Card.Text>
+                                                <Card.Text>{item.name} (Quantity: x{item.quantity} )</Card.Text>
                                             </Col>
                                             <Col md={4} className="text-end">
                                                 <Card.Text>₱{price.toFixed(2)}</Card.Text>
