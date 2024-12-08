@@ -3,14 +3,6 @@
   flex-direction: column;
   height: 100%;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  overflow: hidden;
-}
-  
-.custom-card .card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .custom-card:hover {

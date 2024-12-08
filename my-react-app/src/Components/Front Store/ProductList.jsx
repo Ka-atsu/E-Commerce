@@ -59,19 +59,19 @@ const ProductList = () => {
                         {filteredProducts.map((product) => (
                             <Col key={product.id} md={3}>
                                 <Link to={`/viewuserproduct/${product.id}`} className="text-decoration-none">
-                                    <Card className="h-100 custom-card">
-                                        <Card.Body className="d-flex flex-column">
-                                            <Card.Title>{product.product_name}</Card.Title>
-                                            <Card.Text>{product.product_description}</Card.Text>
-                                            <div className="mt-auto">
-                                                <Card.Text>
-                                                    <strong>Price:</strong> ₱{parseFloat(product.product_amount).toFixed(2)}
-                                                    <br />
-                                                    <strong>Availability:</strong> {product.product_available_quantity}
-                                                </Card.Text>
-                                            </div>
-                                        </Card.Body>
-                                    </Card>
+                                <Card className="h-100 custom-card" style={{ backgroundColor: '#f5f5f5' }}>
+                                    <Card.Body className="d-flex flex-column">
+                                        <Card.Title>{product.product_name}</Card.Title>
+                                        <Card.Text>{product.product_description}</Card.Text>
+                                        <div className="mt-auto">
+                                            <Card.Text>
+                                                <strong>Price:</strong> ₱{parseFloat(product.product_amount).toFixed(2)}
+                                                <br />
+                                                <strong>Availability:</strong> {product.product_available_quantity}
+                                            </Card.Text>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
                                 </Link>
                             </Col>
                         ))}
