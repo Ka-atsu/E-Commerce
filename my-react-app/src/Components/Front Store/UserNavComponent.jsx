@@ -14,9 +14,9 @@ const UserNavComponent = ({ handleSearch, cartCount }) => {
     <Navbar bg="transparent" expand="lg" className="mb-4">
       <Container className="d-flex align-items-center justify-content-between mt-3">
         <div className="d-flex align-items-center"> 
-          <img src={logo} alt="My Shop Logo" className="me-2 logo-image" /> 
+          <img src={logo} alt="ShoeFits Logo" className="me-2 logo-image" /> 
           <Navbar.Brand as={Link} to="/productlist" className="me-auto">
-            <strong>My Shop</strong>
+            <strong>ShoeFITS</strong>
           </Navbar.Brand>
         </div>
 
