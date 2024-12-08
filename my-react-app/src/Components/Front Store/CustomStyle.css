@@ -14,7 +14,7 @@
 }
 
 .custom-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(75, 33, 33, 0.815);
   transition: box-shadow 0.3s ease;
 }
 
@@ -38,4 +38,19 @@ ul {
   color:#bc4749;
   font-size: x-large;
   font-weight: 600;
+}
+
+.logo-image {
+  width: 90px;
+  border-radius: 50px;
+  margin-left: 0px;
+}
+.mb-4 .me-auto {
+  font-size: 30px;
+  color:#570303;
+  margin-left: 20px;
+}
+.sidebar2 [type="checkbox"]:hover {
+  border-color: aqua;
+  cursor: pointer;
 }

@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import logo from './logo.png'; // Import your logo image
 
 const UserNavComponent = ({ handleSearch, cartCount }) => {
   const location = useLocation();
@@ -11,22 +12,25 @@ const UserNavComponent = ({ handleSearch, cartCount }) => {
   return (
     <Navbar bg="transparent" expand="lg" className="mb-4">
       <Container className="d-flex align-items-center justify-content-between mt-3">
-        <Navbar.Brand as={Link} to="/productlist" className="me-auto">
-          <strong>My Shop</strong>
-        </Navbar.Brand>
-        
+        <div className="d-flex align-items-center"> 
+          <img src={logo} alt="My Shop Logo" className="me-2 logo-image" /> 
+          <Navbar.Brand as={Link} to="/productlist" className="me-auto">
+            <strong>My Shop</strong>
+          </Navbar.Brand>
+        </div>
+
         {showSearchBar && (
-          <Form className="d-flex mx-auto" style={{ flexGrow: 1, maxWidth: '600px' }}>
+          <Form className="d-flex mx-auto" style={{ flexGrow: 1, maxWidth: '380px' }}>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search for a product"
               className="me-2"
               style={{ width: '100%', height: '38px', fontSize: '1rem' }}
               onChange={handleSearch} 
             />
           </Form>
         )}
-        
+
         <Link to="/productcart" className="btn btn-outline-dark btn-sm ms-auto">
           Cart {cartCount > 0 && <span className="badge bg-danger ms-2">{cartCount}</span>}
         </Link>

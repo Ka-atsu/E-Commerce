@@ -181,3 +181,13 @@
 .customButton:hover {
   color: rgb(104, 21, 21);
 }
+
+.sidebar-logo {
+  width: 90px;
+  border-radius: 50px;
+}
+
+.d-flex {
+  background-color: transparent;
+  width: 320px;  
+}
